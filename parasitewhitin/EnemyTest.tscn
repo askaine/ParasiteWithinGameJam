@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://cakdbtxho1uw6"]
+
+[ext_resource type="Script" uid="uid://erk1psqh1t6e" path="res://scripts/Pawn.gd" id="1_uape3"]
+
+[sub_resource type="Gradient" id="Gradient_e6kq8"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_uape3"]
+gradient = SubResource("Gradient_e6kq8")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_e6kq8"]
+radius = 222.0
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+script = ExtResource("1_uape3")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, 78.25)
+scale = Vector2(1, 157.5)
+texture = SubResource("GradientTexture1D_uape3")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2(0, 78.25)
+scale = Vector2(1, 157.5)
+polygon = PackedVector2Array(-128, -0.5, -128, 0.5, 128, 0.5, 128, -0.5)
+
+[node name="InteractionArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
+shape = SubResource("CircleShape2D_e6kq8")
