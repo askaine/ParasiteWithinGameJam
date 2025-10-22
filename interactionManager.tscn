@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3 uid="uid://doq6jsdiajdbm"]
+
+[ext_resource type="Script" uid="uid://by5kf3lf4uu1i" path="res://scripts/interactionManager.gd" id="1_t7rgq"]
+
+[node name="InteractionManager" type="Node2D"]
+z_index = 20
+script = ExtResource("1_t7rgq")
+
+[node name="Label" type="Label" parent="."]
+z_index = 20
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -49.5
+offset_right = 49.5
+offset_bottom = 23.0
+grow_horizontal = 2
+scale = Vector2(2, 2)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+text = "[E] To Infect"
+horizontal_alignment = 1
+vertical_alignment = 1

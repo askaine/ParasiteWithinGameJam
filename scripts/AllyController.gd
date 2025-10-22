@@ -6,6 +6,7 @@ var controlled_pawn: Node = null  # Only the currently possessed pawn
 func handle_ai(delta: float) -> void:
 	if not controlled_pawn:
 		return
+	controlled_pawn.velocity.x = 0
 
 	
 
@@ -18,7 +19,7 @@ func get_nearby_pawns() -> Array[Node]:
 	var bodies: Array = area.get_overlapping_bodies()
 	var pawns: Array[Node] = []
 	for b in bodies:
-		if b != self and (b.is_in_group("Player") or b.is_in_group("Ally")):
+		if b != self and b.is_in_group("Enemy"):
 			pawns.append(b as Node)
 	return pawns
 
@@ -44,4 +45,3 @@ func find_nearby_pawn(current_pawn: Node) -> Node:
 			closest = pnode
 
 	return closest
-	

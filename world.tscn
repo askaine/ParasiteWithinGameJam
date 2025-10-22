@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bbw6wp8t316yo"]
+[gd_scene load_steps=18 format=3 uid="uid://bbw6wp8t316yo"]
 
 [ext_resource type="Texture2D" uid="uid://drj7yyfgprp25" path="res://Assets/Tiles/RoofAtlas.png" id="1_f3sb7"]
 [ext_resource type="PackedScene" uid="uid://di3ekj27o7rs1" path="res://character.tscn" id="1_fj7yv"]
@@ -9,6 +9,8 @@
 [ext_resource type="Texture2D" uid="uid://djolneymkabpk" path="res://Assets/BackgroundAndForeGroundSillouets/Sillouet01.png" id="6_dwbse"]
 [ext_resource type="Script" uid="uid://btketm83xc8ha" path="res://scripts/GameController.gd" id="7_pkg7o"]
 [ext_resource type="Script" uid="uid://sh5jchf1rfwa" path="res://scripts/PlayerController.gd" id="8_gbfbk"]
+[ext_resource type="Script" uid="uid://cu6tsp61jwldc" path="res://scripts/EnemyController.gd" id="10_wse8f"]
+[ext_resource type="Script" uid="uid://b7c3lluw5qn0j" path="res://scripts/AllyController.gd" id="11_ic0uy"]
 
 [sub_resource type="Gradient" id="Gradient_tlwt5"]
 colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
@@ -38,7 +40,7 @@ texture_region_size = Vector2i(250, 250)
 [sub_resource type="TileSet" id="TileSet_gv5m4"]
 sources/0 = SubResource("TileSetAtlasSource_fj7yv")
 
-[node name="World" type="Node2D"]
+[node name="World" type="Node2D" groups=["Ally", "Enemy"]]
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0.54099, 0.54099, 0.54099, 1)
@@ -175,14 +177,17 @@ layer_0/tile_data = PackedInt32Array(-65541, 65536, 0, -131068, 131072, 0, -1310
 [node name="Player" type="Node2D" parent="."]
 position = Vector2(3, -102)
 
-[node name="Character" parent="Player" instance=ExtResource("1_fj7yv")]
+[node name="Player" parent="Player" instance=ExtResource("1_fj7yv")]
 position = Vector2(1, -43)
 scale = Vector2(0.4, 0.4)
 
 [node name="Enemies" type="Node2D" parent="."]
 
 [node name="CharacterBody2D" parent="Enemies" instance=ExtResource("5_ioo17")]
-position = Vector2(908, -124)
+position = Vector2(-305, -259)
+
+[node name="CharacterBody2D2" parent="Enemies" instance=ExtResource("5_ioo17")]
+position = Vector2(269, -173)
 
 [node name="ForeGround" type="Node2D" parent="."]
 
@@ -278,3 +283,9 @@ script = ExtResource("8_gbfbk")
 [node name="Camera2D" type="Camera2D" parent="GameController"]
 position = Vector2(4, -145)
 scale = Vector2(0.4, 0.4)
+
+[node name="EnemyController" type="Node2D" parent="GameController"]
+script = ExtResource("10_wse8f")
+
+[node name="AllyController" type="Node2D" parent="GameController"]
+script = ExtResource("11_ic0uy")
