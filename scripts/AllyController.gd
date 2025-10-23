@@ -1,7 +1,7 @@
 extends Node
 
 @export var speed: float = 120.0
-@export var follow_distance: float = 500.0
+@export var follow_distance: float = 400.0
 @export var enemy_detection_range: float = 1000.0
 
 var controlled_pawn: CharacterBody2D = null

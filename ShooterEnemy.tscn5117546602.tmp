@@ -1,0 +1,51 @@
+[gd_scene load_steps=10 format=3 uid="uid://cfsj2hr5504iq"]
+
+[ext_resource type="Script" uid="uid://erk1psqh1t6e" path="res://scripts/Pawn.gd" id="1_8v7ne"]
+[ext_resource type="Script" uid="uid://ooiqklebv66c" path="res://Health.gd" id="1_pu8uq"]
+[ext_resource type="Script" uid="uid://cfv5r3ua22qpu" path="res://scripts/BulletSpawner.gd" id="2_o8ra1"]
+[ext_resource type="PackedScene" uid="uid://cl6pxr8gyp530" path="res://Bullet.tscn" id="4_bkg2p"]
+
+[sub_resource type="Gradient" id="Gradient_e6kq8"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_o8ra1"]
+gradient = SubResource("Gradient_e6kq8")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8v7ne"]
+radius = 222.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bkg2p"]
+radius = 743.363
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jvdf5"]
+size = Vector2(256, 158)
+
+[node name="ShooterEnemy" type="CharacterBody2D" groups=["Enemy"]]
+script = ExtResource("1_8v7ne")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, 78.25)
+scale = Vector2(1, 157.5)
+texture = SubResource("GradientTexture1D_o8ra1")
+
+[node name="InteractionArea" type="Area2D" parent="."]
+z_index = 20
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
+shape = SubResource("CircleShape2D_8v7ne")
+
+[node name="DetectionArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
+shape = SubResource("CircleShape2D_bkg2p")
+
+[node name="Health" type="Node2D" parent="."]
+script = ExtResource("1_pu8uq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 78)
+shape = SubResource("RectangleShape2D_jvdf5")
+
+[node name="BulletSpawner" type="Node2D" parent="."]
+script = ExtResource("2_o8ra1")
+bullet_scene = ExtResource("4_bkg2p")
