@@ -19,6 +19,10 @@ config/icon="res://icon.svg"
 
 InteractionManager="*res://interactionManager.tscn"
 
+[dotnet]
+
+project/assembly_name="ParasiteWhitin"
+
 [global_group]
 
 Enemy=""
