@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://drj7yyfgprp25"
-path="res://.godot/imported/RoofAtlas.png-8f1f4139da43e0662ba96a36d7bdcb31.ctex"
+uid="uid://ck4ameaq71qiw"
+path="res://.godot/imported/Walk04.png-9750058d60df200dffe0146e6485d103.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Tiles/RoofAtlas.png"
-dest_files=["res://.godot/imported/RoofAtlas.png-8f1f4139da43e0662ba96a36d7bdcb31.ctex"]
+source_file="res://Assets/Character/Walking/Walk04.png"
+dest_files=["res://.godot/imported/Walk04.png-9750058d60df200dffe0146e6485d103.ctex"]
 
 [params]
 

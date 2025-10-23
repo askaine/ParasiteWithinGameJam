@@ -1,8 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://cakdbtxho1uw6"]
+[gd_scene load_steps=7 format=3 uid="uid://cakdbtxho1uw6"]
 
 [ext_resource type="Script" uid="uid://erk1psqh1t6e" path="res://scripts/Pawn.gd" id="1_uape3"]
 [ext_resource type="Script" uid="uid://ooiqklebv66c" path="res://Health.gd" id="2_8v7th"]
-[ext_resource type="Script" uid="uid://c54svq3tuj2ky" path="res://scripts/interactionArea.gd" id="2_bgm5c"]
 
 [sub_resource type="Gradient" id="Gradient_e6kq8"]
 colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
@@ -31,8 +30,6 @@ polygon = PackedVector2Array(-128, -0.5, -128, 0.5, 128, 0.5, 128, -0.5)
 
 [node name="InteractionArea" type="Area2D" parent="."]
 z_index = 20
-script = ExtResource("2_bgm5c")
-action_name = "Infect"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
 shape = SubResource("CircleShape2D_e6kq8")

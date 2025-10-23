@@ -7,9 +7,11 @@ const base_text = "[E] to "
 
 var active_areas = []
 var can_interact = true
+var kill = false
 
 func register_area(area: InteractionArea):
-	can_interact = true
+	if not kill:
+		can_interact = true
 	active_areas.push_back(area)
 	
 func unregister_area(area: InteractionArea):
@@ -38,4 +40,5 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("possess") and can_interact:
 		label.hide()
 		can_interact = false
+		kill = true
 		await active_areas[0].interact.call()
