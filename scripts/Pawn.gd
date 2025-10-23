@@ -25,10 +25,9 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 
-	
-	
 	if not is_on_surface():
 		velocity.y += gravity * GRAVITY_MULTIPLIER * delta
+		print(velocity.y)
 
 
 	if not controller:
@@ -93,3 +92,6 @@ func is_player_self_controlled() -> bool:
 func green_tint() -> void:
 	var sprite: Sprite2D = $Sprite2D 
 	sprite.modulate = Color(0.0, 0.5, 0.0, 1.0)
+
+func is_on_surface() -> bool:
+	return is_on_floor() or is_on_ceiling()

@@ -53,7 +53,10 @@ func _physics_process(delta: float) -> void:
 					var pawn_shape = nearest.get_node_or_null("CollisionShape2D")
 					var offset_x = 0
 					if player_shape and pawn_shape:
-						offset_x = sign(nearest.global_position.x - controlled_pawn.global_position.x) * (pawn_shape.shape.extents.x/2 + player_shape.shape.extents.x/2 + 5)
+						var pawn_extent = get_shape_horizontal_extent(pawn_shape.shape)
+						var player_extent = get_shape_horizontal_extent(player_shape.shape)
+						offset_x = sign(nearest.global_position.x - controlled_pawn.global_position.x) * (pawn_extent + player_extent + 5)
+
 					
 					var target_pos = nearest.global_position + Vector2(offset_x, -50)
 
@@ -119,5 +122,14 @@ func find_nearby_pawn(current_pawn: Node) -> Node:
 	
 func is_player_self_controlled() -> bool:
 	return get_node("/root/World/GameController").current_pawn == get_node("/root/World/GameController").original_player
-	
+
+
+func get_shape_horizontal_extent(shape: Shape2D) -> float:
+	if shape is RectangleShape2D:
+		return shape.extents.x
+	elif shape is CapsuleShape2D:
+		return shape.radius  # Capsule width = radius * 2
+	elif shape is CircleShape2D:
+		return shape.radius
+	return 0.0	
 	
