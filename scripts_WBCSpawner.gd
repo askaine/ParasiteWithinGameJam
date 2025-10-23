@@ -6,7 +6,7 @@ extends Node
 
 @export var wbc_scene: PackedScene
 @export var min_interval: float = 15.0
-@export var max_interval: float = 20.0
+@export var max_interval: float = 25.0
 @export var spawn_min_distance: float = 480.0
 @export var spawn_max_distance: float = 720.0
 
