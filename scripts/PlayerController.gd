@@ -15,7 +15,11 @@ func _physics_process(delta: float) -> void:
 	controlled_pawn.move_horizontal(dir)
 
 	if Input.is_action_just_pressed("ui_accept"):
-		controlled_pawn.jump()
+		if is_player_self_controlled():
+			controlled_pawn.change_surface()
+		else:
+			controlled_pawn.jump()
+			
 		
 	if controlled_pawn.velocity.y>0:
 		if controlled_pawn.has_node("AnimatedSprite2D"):
@@ -86,6 +90,7 @@ func _physics_process(delta: float) -> void:
 
 
 
+
 # Find a nearby pawn using the pawn's InteractionArea
 func find_nearby_pawn(current_pawn: Node) -> Node:
 	if not current_pawn:
@@ -110,3 +115,9 @@ func find_nearby_pawn(current_pawn: Node) -> Node:
 			closest = pnode
 
 	return closest
+	
+	
+func is_player_self_controlled() -> bool:
+	return get_node("/root/World/GameController").current_pawn == get_node("/root/World/GameController").original_player
+	
+	
