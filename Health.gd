@@ -28,4 +28,4 @@ func die() -> void:
 	print("%s died" % get_parent().name)
 	emit_signal("died")
 	# Remove parent node from scene tree
-	get_parent().queue_free()
+	

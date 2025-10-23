@@ -1,9 +1,12 @@
 extends CharacterBody2D
 
-const SPEED = 150.0
+const SPEED = 150.0	
 const JUMP_VELOCITY = -500.0
 const GRAVITY_MULTIPLIER = 0.9
+var virus_color = Color(0, 1, 0, 1)
 
+
+var possessing = false
 var controller: Node = null
 var gravity = 600
 
@@ -28,19 +31,12 @@ func _physics_process(delta: float) -> void:
 		velocity.y += gravity * GRAVITY_MULTIPLIER * delta
 
 
-	# Only send input if this pawn is the currently controlled pawn
 	if not controller:
 		return
-	# Only handle input or AI if this pawn is the currently controlled one
 	if controller.has_method("handle_input") and controller.controlled_pawn == self:
 			controller.handle_input(delta)
-	elif controller.has_method("handle_ai"):
-		controller.handle_ai(delta)
 	else:
-		# Not controlled → stop horizontal movement
 		velocity.x = 0
-	
-	
 
 	move_and_slide()
 
@@ -86,15 +82,14 @@ func get_pawns_in_infection_range() -> Array[Node]:
 
 	
 func get_player() -> Node:
-	var area: Area2D = $DetectionArea if has_node("DetectionArea") else null
-	if not area:
+	var gc = get_node("/root/World/GameController")
+	if not gc:
 		return null
-	var bodies: Array = area.get_overlapping_bodies()
-	var pawn: Node = null
-	for b in bodies:
-		if b != self and b.is_in_group("Player"):
-			pawn = b as Node
-	return pawn
+	return gc.current_pawn
 	
-func is_on_surface() -> bool:
-	return is_on_floor() or is_on_ceiling()
+func is_player_self_controlled() -> bool:
+	return get_node("/root/World/GameController").current_pawn == get_node("/root/World/GameController").original_player
+	
+func green_tint() -> void:
+	var sprite: Sprite2D = $Sprite2D 
+	sprite.modulate = Color(0.0, 0.5, 0.0, 1.0)

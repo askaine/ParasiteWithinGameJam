@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://bbw6wp8t316yo"]
+[gd_scene load_steps=22 format=3 uid="uid://bbw6wp8t316yo"]
 
 [ext_resource type="Texture2D" uid="uid://drj7yyfgprp25" path="res://Assets/Tiles/TileAtlas.png" id="1_f3sb7"]
 [ext_resource type="PackedScene" uid="uid://di3ekj27o7rs1" path="res://character.tscn" id="1_fj7yv"]
@@ -6,9 +6,10 @@
 [ext_resource type="Texture2D" uid="uid://bv33pxmd8n4gr" path="res://Assets/Tiles/TileGround.png" id="3_k3n1d"]
 [ext_resource type="Texture2D" uid="uid://dt0ccnp3ml0r4" path="res://Assets/Tiles/Tile01.png" id="4_aqk2v"]
 [ext_resource type="Texture2D" uid="uid://dexglkn3cvaho" path="res://Assets/Tiles/Tile03.png" id="5_036b0"]
-[ext_resource type="PackedScene" uid="uid://cakdbtxho1uw6" path="res://EnemyTest.tscn" id="5_ioo17"]
+[ext_resource type="PackedScene" uid="uid://cakdbtxho1uw6" path="res://FirstEnemy.tscn" id="5_ioo17"]
 [ext_resource type="Texture2D" uid="uid://djolneymkabpk" path="res://Assets/BackgroundAndForeGroundSillouets/Sillouet01.png" id="6_dwbse"]
 [ext_resource type="Script" uid="uid://c54svq3tuj2ky" path="res://scripts/interactionArea.gd" id="7_2o6r5"]
+[ext_resource type="PackedScene" uid="uid://cfsj2hr5504iq" path="res://ShooterEnemy.tscn" id="7_70uel"]
 [ext_resource type="Script" uid="uid://btketm83xc8ha" path="res://scripts/GameController.gd" id="7_pkg7o"]
 [ext_resource type="Script" uid="uid://sh5jchf1rfwa" path="res://scripts/PlayerController.gd" id="8_gbfbk"]
 [ext_resource type="Script" uid="uid://cu6tsp61jwldc" path="res://scripts/EnemyController.gd" id="10_wse8f"]
@@ -186,6 +187,9 @@ action_name = "Infect"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Enemies/FirstEnemy/InteractionArea2"]
 shape = SubResource("CircleShape2D_70uel")
+
+[node name="ShooterEnemy" parent="Enemies" instance=ExtResource("7_70uel")]
+position = Vector2(112, -206)
 
 [node name="Player" type="Node2D" parent="."]
 position = Vector2(-431, -12)

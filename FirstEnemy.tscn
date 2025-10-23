@@ -1,13 +1,13 @@
-[gd_scene load_steps=7 format=3 uid="uid://cakdbtxho1uw6"]
+[gd_scene load_steps=8 format=3 uid="uid://cakdbtxho1uw6"]
 
-[ext_resource type="Script" uid="uid://erk1psqh1t6e" path="res://scripts/Pawn.gd" id="1_uape3"]
-[ext_resource type="Script" uid="uid://ooiqklebv66c" path="res://Health.gd" id="2_8v7th"]
+[ext_resource type="Script" uid="uid://erk1psqh1t6e" path="res://scripts/Pawn.gd" id="1_ofq16"]
+[ext_resource type="Script" uid="uid://ooiqklebv66c" path="res://Health.gd" id="2_hyv26"]
 
-[sub_resource type="Gradient" id="Gradient_e6kq8"]
-colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
+[sub_resource type="Gradient" id="Gradient_ofq16"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_uape3"]
-gradient = SubResource("Gradient_e6kq8")
+gradient = SubResource("Gradient_ofq16")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_e6kq8"]
 radius = 222.0
@@ -15,18 +15,16 @@ radius = 222.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_uape3"]
 radius = 743.363
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8v7th"]
+size = Vector2(256, 158)
+
 [node name="CharacterBody2D" type="CharacterBody2D" groups=["Enemy"]]
-script = ExtResource("1_uape3")
+script = ExtResource("1_ofq16")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, 78.25)
 scale = Vector2(1, 157.5)
 texture = SubResource("GradientTexture1D_uape3")
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-position = Vector2(0, 78.25)
-scale = Vector2(1, 157.5)
-polygon = PackedVector2Array(-128, -0.5, -128, 0.5, 128, 0.5, 128, -0.5)
 
 [node name="InteractionArea" type="Area2D" parent="."]
 z_index = 20
@@ -40,4 +38,8 @@ shape = SubResource("CircleShape2D_e6kq8")
 shape = SubResource("CircleShape2D_uape3")
 
 [node name="Health" type="Node2D" parent="."]
-script = ExtResource("2_8v7th")
+script = ExtResource("2_hyv26")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 78)
+shape = SubResource("RectangleShape2D_8v7th")

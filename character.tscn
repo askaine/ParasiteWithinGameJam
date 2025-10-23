@@ -73,8 +73,9 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_pjt0s"]
 radius = 428.005
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_wa5vi"]
-size = Vector2(579, 288)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jb3kq"]
+radius = 71.0
+height = 526.0
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 script = ExtResource("1_pjt0s")
@@ -103,5 +104,6 @@ shape = SubResource("CircleShape2D_pjt0s")
 script = ExtResource("3_wa5vi")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-0.5, 6)
-shape = SubResource("RectangleShape2D_wa5vi")
+position = Vector2(3, 64)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_jb3kq")
