@@ -13,7 +13,7 @@ func _physics_process(delta: float) -> void:
 	
 
 func _on_body_entered(body: Node) -> void:
-	if body.has_node("Health") and (body.is_in_group("Player") or body.is_in_group("Ally")):
+	if body.has_node("Health"):
 		var health = body.get_node("Health")
 		health.take_damage(damage)
 		queue_free()

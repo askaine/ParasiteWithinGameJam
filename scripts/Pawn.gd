@@ -9,6 +9,7 @@ var virus_color = Color(0, 1, 0, 1)
 var possessing = false
 var controller: Node = null
 var gravity = 600
+var health = 100
 
 
 func _ready() -> void:
@@ -25,7 +26,6 @@ func _physics_process(delta: float) -> void:
 
 	if not is_on_surface():
 		velocity.y += gravity * GRAVITY_MULTIPLIER * delta
-		print(velocity.y)
 
 
 	if not controller:
@@ -61,6 +61,9 @@ func change_surface() -> void:
 			velocity.y = -JUMP_VELOCITY
 		gravity *= -1
 		rotation += PI
+
+func knockback(vector: Vector2) -> void:
+	velocity += vector
 
 func get_pawns_in_infection_range() -> Array[Node]:
 	var area: Area2D = $InteractionArea if has_node("InteractionArea") else null
@@ -98,3 +101,5 @@ func shoot_at(cords: Vector2) -> void:
 		return
 	spawner.shoot(cords)
 	
+func take_damage(amount: int) -> void:
+	self.get_node("Health").take_damage(amount)
