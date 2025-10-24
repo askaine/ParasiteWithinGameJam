@@ -90,10 +90,11 @@ func green_tint() -> void:
 func is_on_surface() -> bool:
 	return is_on_floor() or is_on_ceiling()
 
-func shoot_at(target: Node) -> void:
+func shoot_at(cords: Vector2) -> void:
 	if not has_node("BulletSpawner"):
 		return
 	var spawner = get_node("BulletSpawner")
 	if not spawner.has_method("shoot"):
 		return
-	spawner.shoot(target.global_position)
+	spawner.shoot(cords)
+	

@@ -58,7 +58,7 @@ func ShooterEnemyAi(enemy: Node, delta: float) -> void:
 	# Check line of sight
 	if has_line_of_sight(enemy, target):
 		stop_movement(enemy)
-		enemy.shoot_at(target)
+		enemy.shoot_at(target.global_position)
 	else:
 		move_towards(enemy, target, 50) # move closer slowly if blocked
 

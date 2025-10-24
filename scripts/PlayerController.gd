@@ -1,4 +1,4 @@
-extends Node
+extends Node2D
 
 var controlled_pawn: Node = null  # Only the currently possessed pawn
 var possess_pressed: bool = false  # debounce for possess input
@@ -19,6 +19,9 @@ func _physics_process(delta: float) -> void:
 			controlled_pawn.change_surface()
 		else:
 			controlled_pawn.jump()
+			
+	if Input.is_action_just_pressed("attack"):
+		controlled_pawn.shoot_at(get_global_mouse_position())
 			
 		
 	if controlled_pawn.velocity.y>0:
@@ -48,7 +51,6 @@ func _physics_process(delta: float) -> void:
 					if controlled_pawn.has_node("CollisionShape2D"):
 						controlled_pawn.get_node("CollisionShape2D").disabled = true
 						
-					
 
 					# Calculate jump target
 					var player_shape = controlled_pawn.get_node_or_null("CollisionShape2D")
@@ -90,12 +92,6 @@ func _physics_process(delta: float) -> void:
 	else:
 		possess_pressed = false  # reset when key released
 	
-
-				
-
-
-
-
 # Find a nearby pawn using the pawn's InteractionArea
 func find_nearby_pawn(current_pawn: Node) -> Node:
 	if not current_pawn:
