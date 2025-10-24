@@ -1,15 +1,24 @@
-extends Node
+extends Node2D
+
+
+@export var melee_range: float = 80.0  # How far the attack reaches
+@export var melee_width: float = 60.0  # Height of the attack hitbox
+@export var melee_damage: int = 10
 
 var controlled_pawn: Node = null  # Only the currently possessed pawn
 var possess_pressed: bool = false  # debounce for possess input
 var facing_left: bool = false
+var can_attack: bool = true
+var attack_cooldown: float = 0.5
+var hit_stop: bool = false
+var hit_stop_cooldown: float = 0.5
 
 
 func handle_input(delta: float) -> void:
 	pass
 
 func _physics_process(delta: float) -> void:
-	if not controlled_pawn:
+	if not controlled_pawn or not can_act():
 		return
 	var dir := Input.get_axis("ui_left", "ui_right")
 	controlled_pawn.move_horizontal(dir)
@@ -19,6 +28,12 @@ func _physics_process(delta: float) -> void:
 			controlled_pawn.change_surface()
 		else:
 			controlled_pawn.jump()
+			
+	if Input.is_action_just_pressed("attack"):
+		shoot()
+		
+	if Input.is_action_just_pressed("f_key"):
+		attack()
 			
 		
 	if controlled_pawn.velocity.y>0:
@@ -47,6 +62,7 @@ func _physics_process(delta: float) -> void:
 					# Disable collision while in the air
 					if controlled_pawn.has_node("CollisionShape2D"):
 						controlled_pawn.get_node("CollisionShape2D").disabled = true
+						
 
 					# Calculate jump target
 					var player_shape = controlled_pawn.get_node_or_null("CollisionShape2D")
@@ -88,12 +104,6 @@ func _physics_process(delta: float) -> void:
 	else:
 		possess_pressed = false  # reset when key released
 	
-
-				
-
-
-
-
 # Find a nearby pawn using the pawn's InteractionArea
 func find_nearby_pawn(current_pawn: Node) -> Node:
 	if not current_pawn:
@@ -132,4 +142,67 @@ func get_shape_horizontal_extent(shape: Shape2D) -> float:
 	elif shape is CircleShape2D:
 		return shape.radius
 	return 0.0	
+
+func scan_melee_area(facing_direction: float) -> Array[Node]:
+	var space_state = get_world_2d().direct_space_state
 	
+	# Create rectangle hitbox in front of player
+	var shape = RectangleShape2D.new()
+	shape.extents = Vector2(melee_range / 2, melee_width / 2)
+	
+	# Position hitbox in front
+	var offset = Vector2(facing_direction * melee_range / 2, 0)
+	var attack_position = global_position + offset
+	
+	# Query physics
+	var params = PhysicsShapeQueryParameters2D.new()
+	params.shape = shape
+	params.transform = Transform2D(0, attack_position)
+	params.exclude = [self]
+	
+	var results = space_state.intersect_shape(params)
+	
+	# Filter valid targets
+	var hit_targets: Array[Node] = []
+	for result in results:
+		var target = result.collider
+		
+		# Only hit enemies or other valid targets
+		if target.is_in_group("Enemy") or target.is_in_group("Player") or target.is_in_group("Ally"):
+			if target != self:
+				hit_targets.append(target)
+	
+	return hit_targets
+
+func can_act() -> bool:
+	return not hit_stop
+
+func shoot() -> void:
+	controlled_pawn.shoot_at(get_global_mouse_position())
+	
+func attack() -> void:
+	if not can_attack:
+		return
+	
+	# Start cooldown
+	can_attack = false
+	hit_stop = true
+	get_tree().create_timer(attack_cooldown).timeout.connect(func(): can_attack = true)
+	get_tree().create_timer(hit_stop_cooldown).timeout.connect(func(): hit_stop = false)
+	
+	# Play attack animation
+	if has_node("AnimatedSprite2D"):
+		$AnimatedSprite2D.play("Attack")
+	
+	# Determine attack direction
+	var sprite = get_node_or_null("AnimatedSprite2D") if has_node("AnimatedSprite2D") else get_node_or_null("Sprite2D")
+	var facing_direction = -1 if (sprite and sprite.flip_h) else 1
+	
+	# Scan for targets
+	var hit_targets = scan_melee_area(facing_direction)
+	
+	# Apply damage to hit targets
+	for target in hit_targets:
+		if target.has_method("take_damage"):
+			target.take_damage(melee_damage)
+			target.knockback(Vector2(facing_direction * -20000000, 100)) #not finished (TO DO)

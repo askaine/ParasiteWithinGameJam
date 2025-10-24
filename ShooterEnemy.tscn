@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://cfsj2hr5504iq"]
 
 [ext_resource type="Script" uid="uid://erk1psqh1t6e" path="res://scripts/Pawn.gd" id="1_8v7ne"]
-[ext_resource type="Script" uid="uid://ooiqklebv66c" path="res://Health.gd" id="1_pu8uq"]
+[ext_resource type="Script" uid="uid://ooiqklebv66c" path="res://scripts/Health.gd" id="1_pu8uq"]
 [ext_resource type="Script" uid="uid://cfv5r3ua22qpu" path="res://scripts/BulletSpawner.gd" id="2_o8ra1"]
 [ext_resource type="PackedScene" uid="uid://cl6pxr8gyp530" path="res://Bullet.tscn" id="4_bkg2p"]
 
