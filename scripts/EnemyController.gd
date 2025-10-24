@@ -58,11 +58,9 @@ func ShooterEnemyAi(enemy: Node, delta: float) -> void:
 	# Check line of sight
 	if has_line_of_sight(enemy, target):
 		stop_movement(enemy)
-		shoot_at(enemy, target)
+		enemy.shoot_at(target)
 	else:
 		move_towards(enemy, target, 50) # move closer slowly if blocked
-
-
 
 func get_current_target() -> Node:
 	var gc = get_node("/root/World/GameController")
@@ -102,13 +100,6 @@ func has_line_of_sight(enemy: Node2D, target: Node2D) -> bool:
 
 
 
-func shoot_at(enemy: Node, target: Node) -> void:
-	if not enemy.has_node("BulletSpawner"):
-		return
-	var spawner = enemy.get_node("BulletSpawner")
-	if not spawner.has_method("shoot"):
-		return
-	spawner.shoot(target.global_position)
 
 
 func add_pawn(pawn: Node) -> void:

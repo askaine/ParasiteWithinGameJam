@@ -11,7 +11,6 @@ var controller: Node = null
 var gravity = 600
 
 
-
 func _ready() -> void:
 	if self.is_in_group("Player"):
 		var gc = get_node("/root/World/GameController")
@@ -21,7 +20,6 @@ func _ready() -> void:
 		controller = gc.enemy_controller if gc else null
 	if controller:
 		controller.controlled_pawn = self
-
 
 func _physics_process(delta: float) -> void:
 
@@ -39,8 +37,6 @@ func _physics_process(delta: float) -> void:
 
 	move_and_slide()
 
-
-
 func move_horizontal(dir: float) -> void:
 	if dir != 0:
 		if is_on_surface() and controller.controlled_pawn.has_node("AnimatedSprite2D"):
@@ -48,7 +44,6 @@ func move_horizontal(dir: float) -> void:
 		velocity.x = dir * SPEED
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
-
 
 func jump() -> void:
 	if is_on_surface():
@@ -79,7 +74,6 @@ func get_pawns_in_infection_range() -> Array[Node]:
 			pawns.append(b as Node)
 	return pawns
 
-	
 func get_player() -> Node:
 	var gc = get_node("/root/World/GameController")
 	if not gc:
@@ -95,3 +89,11 @@ func green_tint() -> void:
 
 func is_on_surface() -> bool:
 	return is_on_floor() or is_on_ceiling()
+
+func shoot_at(target: Node) -> void:
+	if not has_node("BulletSpawner"):
+		return
+	var spawner = get_node("BulletSpawner")
+	if not spawner.has_method("shoot"):
+		return
+	spawner.shoot(target.global_position)

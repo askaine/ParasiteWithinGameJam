@@ -47,6 +47,8 @@ func _physics_process(delta: float) -> void:
 					# Disable collision while in the air
 					if controlled_pawn.has_node("CollisionShape2D"):
 						controlled_pawn.get_node("CollisionShape2D").disabled = true
+						
+					
 
 					# Calculate jump target
 					var player_shape = controlled_pawn.get_node_or_null("CollisionShape2D")
