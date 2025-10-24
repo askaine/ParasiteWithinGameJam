@@ -9,7 +9,7 @@ var virus_color = Color(0, 1, 0, 1)
 var possessing = false
 var controller: Node = null
 var gravity = 600
-
+var health = 100
 
 
 func _ready() -> void:
@@ -22,13 +22,13 @@ func _ready() -> void:
 	if controller:
 		controller.controlled_pawn = self
 
-
 func _physics_process(delta: float) -> void:
 
 	if not is_on_surface() and is_player_self_controlled:
 		velocity.y += gravity * GRAVITY_MULTIPLIER * delta
 	elif not is_player_self_controlled():
 		velocity.y += abs(gravity) * GRAVITY_MULTIPLIER * delta
+
 
 
 	if not controller:
@@ -40,8 +40,6 @@ func _physics_process(delta: float) -> void:
 
 	move_and_slide()
 
-
-
 func move_horizontal(dir: float) -> void:
 	if dir != 0:
 		if is_on_surface() and controller.controlled_pawn.has_node("AnimatedSprite2D"):
@@ -49,7 +47,6 @@ func move_horizontal(dir: float) -> void:
 		velocity.x = dir * SPEED
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
-
 
 func jump() -> void:
 	if is_on_surface():
@@ -70,6 +67,9 @@ func change_surface() -> void:
 		gravity *= -1
 		rotation += PI
 
+func knockback(vector: Vector2) -> void:
+	velocity += vector
+
 func get_pawns_in_infection_range() -> Array[Node]:
 	var area: Area2D = $InteractionArea if has_node("InteractionArea") else null
 	if not area:
@@ -82,7 +82,6 @@ func get_pawns_in_infection_range() -> Array[Node]:
 			pawns.append(b as Node)
 	return pawns
 
-	
 func get_player() -> Node:
 	var gc = get_node("/root/World/GameController")
 	if not gc:
@@ -98,3 +97,14 @@ func green_tint() -> void:
 
 func is_on_surface() -> bool:
 	return is_on_floor() or is_on_ceiling()
+
+func shoot_at(cords: Vector2) -> void:
+	if not has_node("BulletSpawner"):
+		return
+	var spawner = get_node("BulletSpawner")
+	if not spawner.has_method("shoot"):
+		return
+	spawner.shoot(cords)
+	
+func take_damage(amount: int) -> void:
+	self.get_node("Health").take_damage(amount)
