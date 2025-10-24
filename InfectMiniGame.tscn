@@ -1,0 +1,236 @@
+[gd_scene load_steps=15 format=3 uid="uid://dubc88y1xkiub"]
+
+[ext_resource type="PackedScene" uid="uid://di3ekj27o7rs1" path="res://character.tscn" id="1_3odrc"]
+[ext_resource type="Texture2D" uid="uid://djolneymkabpk" path="res://Assets/BackgroundAndForeGroundSillouets/Sillouet01.png" id="1_eeka6"]
+[ext_resource type="Script" uid="uid://dnmgiay0hg6yu" path="res://scripts/InfectMiniGame.gd" id="1_fvaar"]
+[ext_resource type="PackedScene" uid="uid://dd8k3amf1h1ah" path="res://Spike.tscn" id="2_axfi8"]
+[ext_resource type="Script" uid="uid://btketm83xc8ha" path="res://scripts/GameController.gd" id="2_kfbay"]
+[ext_resource type="PackedScene" uid="uid://cj8ny3n7dmrwr" path="res://Brain.tscn" id="2_lj1ig"]
+[ext_resource type="Script" uid="uid://sh5jchf1rfwa" path="res://scripts/PlayerController.gd" id="3_eeka6"]
+[ext_resource type="Script" uid="uid://cu6tsp61jwldc" path="res://scripts/EnemyController.gd" id="4_lj1ig"]
+[ext_resource type="Script" uid="uid://b7c3lluw5qn0j" path="res://scripts/AllyController.gd" id="5_fvaar"]
+
+[sub_resource type="Gradient" id="Gradient_tlwt5"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_lj1ig"]
+gradient = SubResource("Gradient_tlwt5")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lj1ig"]
+radius = 187.963
+
+[sub_resource type="Gradient" id="Gradient_lj1ig"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_fvaar"]
+gradient = SubResource("Gradient_lj1ig")
+
+[node name="World" type="Node2D"]
+script = ExtResource("1_fvaar")
+SpikeScene = ExtResource("2_axfi8")
+
+[node name="Background" type="Node2D" parent="."]
+z_index = -4
+position = Vector2(-1121, 265)
+
+[node name="Polygon2D" type="Polygon2D" parent="Background"]
+color = Color(0.0961667, 1.03601e-05, 0.101362, 1)
+polygon = PackedVector2Array(-2077, -1395, 2767, -1556, 3197, 125, -2595, 125)
+
+[node name="PointLight2D" type="PointLight2D" parent="Background"]
+position = Vector2(2925, -198)
+scale = Vector2(12.8594, 12.0234)
+energy = 1.3
+range_z_max = -4
+texture = SubResource("GradientTexture2D_lj1ig")
+texture_scale = 3.0
+
+[node name="PointLight2D2" type="PointLight2D" parent="Background"]
+position = Vector2(1191, -1401)
+scale = Vector2(12.8594, 12.0234)
+energy = 1.3
+range_z_max = -4
+texture = SubResource("GradientTexture2D_lj1ig")
+texture_scale = 3.0
+
+[node name="PointLight2D3" type="PointLight2D" parent="Background"]
+position = Vector2(-1542, -294)
+scale = Vector2(12.8594, 12.0234)
+energy = 1.3
+range_z_max = -4
+texture = SubResource("GradientTexture2D_lj1ig")
+texture_scale = 3.0
+
+[node name="Siilouets" type="Node2D" parent="Background"]
+position = Vector2(-2762, -171)
+rotation = 0.0780369
+scale = Vector2(4.5, 4.5)
+
+[node name="Parallax2D" type="Parallax2D" parent="Background/Siilouets"]
+scroll_scale = Vector2(0.8, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="Background/Siilouets/Parallax2D"]
+position = Vector2(1097.53, -172.276)
+rotation = 0.9168
+scale = Vector2(0.615789, 0.779272)
+texture = ExtResource("1_eeka6")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Background/Siilouets/Parallax2D"]
+position = Vector2(245.905, -129.326)
+rotation = -0.0792652
+scale = Vector2(0.615789, 0.779272)
+texture = ExtResource("1_eeka6")
+
+[node name="Sprite2D3" type="Sprite2D" parent="Background/Siilouets/Parallax2D"]
+position = Vector2(505.664, -176.147)
+rotation = 0.300414
+scale = Vector2(0.615789, 0.779272)
+texture = ExtResource("1_eeka6")
+
+[node name="Sprite2D4" type="Sprite2D" parent="Background/Siilouets/Parallax2D"]
+position = Vector2(748, -143)
+rotation = 0.802766
+scale = Vector2(0.615789, 0.779272)
+texture = ExtResource("1_eeka6")
+
+[node name="Sprite2D5" type="Sprite2D" parent="Background/Siilouets/Parallax2D"]
+position = Vector2(812, -159)
+rotation = 2.71983
+scale = Vector2(0.615789, 0.779272)
+texture = ExtResource("1_eeka6")
+flip_v = true
+
+[node name="Sprite2D6" type="Sprite2D" parent="Background/Siilouets/Parallax2D"]
+position = Vector2(1179, -175)
+rotation = 2.32075
+scale = Vector2(0.615789, 0.779272)
+texture = ExtResource("1_eeka6")
+flip_h = true
+
+[node name="BlackTiles" type="Node2D" parent="."]
+z_index = -1
+
+[node name="StaticBody2D" type="StaticBody2D" parent="BlackTiles"]
+scale = Vector2(0.2, 0.2)
+
+[node name="Polygon2D" type="Polygon2D" parent="BlackTiles/StaticBody2D"]
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(-9480, 1187, -7715, 1466, -4789, 1420, -2280, 1327, 89, 1327, 1970, 1420, 4409, 1466, 6150, 1350, 9459.35, 1306.24, 8348, -729, 6988, -2770, 4360, -5243, -493, -5676, -2496.81, -5835.58, -4852, -5799, -8963, -5212, -10849, -4130, -14434, -2955, -15640, -1348, -16722, -142, -19440, 2870, -34610, -17015, -19475, -16885, 22425, -16620, 22330, 7470, 22740, 22005, -35555, 22005, -35095, 7795, -34715, -16850, -17001, 1380, -14059, 1322)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="BlackTiles/StaticBody2D"]
+polygon = PackedVector2Array(9478, 1304, 5928, 1346, 4474, 1470, 2970, 1470, -206, 1336, -2386, 1336, -4742, 1428, -7774, 1462, -9512, 1178, -10962, 1264, -16910, 1370, -17515, 770, -19555, 1120, -19754, 7212, 13674, 7208, 13616, -6838, -19522, -7242, -19552, 1150, -17500, 765, -15568, -1440, -14442, -2958, -10818, -4160, -8960, -5230, -5145, -5755, -3915, -5815, -2420, -5850, 4372, -5250, 6978, -2810)
+
+[node name="Platforms" type="Node2D" parent="."]
+z_index = -1
+
+[node name="Platform" type="StaticBody2D" parent="Platforms"]
+visible = false
+
+[node name="Polygon2D" type="Polygon2D" parent="Platforms/Platform"]
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(-2059, -456, -1843, -479, -1448, -445, -1356, -388, -1884, -373)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Platforms/Platform"]
+polygon = PackedVector2Array(-1835, -480, -2054, -456, -1880, -372, -1361, -388, -1450, -444)
+
+[node name="Platform3" type="StaticBody2D" parent="Platforms"]
+visible = false
+position = Vector2(1566, 480)
+
+[node name="Polygon2D" type="Polygon2D" parent="Platforms/Platform3"]
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(-2059, -456, -1843, -479, -1448, -445, -1356, -388, -1884, -373)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Platforms/Platform3"]
+polygon = PackedVector2Array(-1835, -480, -2054, -456, -1880, -372, -1361, -388, -1450, -444)
+
+[node name="Platform2" type="StaticBody2D" parent="Platforms"]
+visible = false
+position = Vector2(-1118, -609)
+rotation = -0.207964
+scale = Vector2(-1, -1)
+
+[node name="Polygon2D" type="Polygon2D" parent="Platforms/Platform2"]
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(-2059, -456, -1843, -479, -1448, -445, -1356, -388, -1884, -373)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Platforms/Platform2"]
+polygon = PackedVector2Array(-1835, -480, -2054, -456, -1880, -372, -1361, -388, -1450, -444)
+
+[node name="Neurons" type="Node2D" parent="."]
+
+[node name="Neuron1" type="Node2D" parent="Neurons"]
+
+[node name="Area2D" type="Area2D" parent="Neurons/Neuron1"]
+position = Vector2(-3327, 183)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Neurons/Neuron1/Area2D"]
+shape = SubResource("CircleShape2D_lj1ig")
+
+[node name="Sprite2D" type="Sprite2D" parent="Neurons/Neuron1/Area2D"]
+position = Vector2(1, 2)
+scale = Vector2(0.332031, 72.5)
+texture = SubResource("GradientTexture1D_fvaar")
+
+[node name="Neuron2" type="Node2D" parent="Neurons"]
+position = Vector2(5034, -5)
+
+[node name="Area2D" type="Area2D" parent="Neurons/Neuron2"]
+position = Vector2(-3327, 183)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Neurons/Neuron2/Area2D"]
+shape = SubResource("CircleShape2D_lj1ig")
+
+[node name="Sprite2D" type="Sprite2D" parent="Neurons/Neuron2/Area2D"]
+position = Vector2(1, 2)
+scale = Vector2(0.332031, 72.5)
+texture = SubResource("GradientTexture1D_fvaar")
+
+[node name="Brain" type="Node2D" parent="."]
+z_index = -3
+
+[node name="Brain" parent="Brain" instance=ExtResource("2_lj1ig")]
+position = Vector2(-649, -360)
+scale = Vector2(3, 3)
+
+[node name="Player" type="Node2D" parent="."]
+position = Vector2(-431, -12)
+
+[node name="Player" parent="Player" instance=ExtResource("1_3odrc")]
+position = Vector2(718, -110)
+scale = Vector2(0.5, 0.5)
+
+[node name="GameController" type="Node2D" parent="."]
+script = ExtResource("2_kfbay")
+
+[node name="PlayerController" type="Node2D" parent="GameController"]
+script = ExtResource("3_eeka6")
+
+[node name="Camera2D" type="Camera2D" parent="GameController"]
+position = Vector2(4, -145)
+scale = Vector2(0.4, 0.4)
+zoom = Vector2(0.2, 0.2)
+
+[node name="EnemyController" type="Node2D" parent="GameController"]
+script = ExtResource("4_lj1ig")
+
+[node name="AllyController" type="Node2D" parent="GameController"]
+script = ExtResource("5_fvaar")
+
+[node name="SpikeSpawns" type="Node2D" parent="."]
+z_index = -2
+
+[node name="FloorSpawn" type="Area2D" parent="SpikeSpawns"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="SpikeSpawns/FloorSpawn"]
+position = Vector2(0, -157)
+polygon = PackedVector2Array(1677, -97, -3604, -77, -3665, 427, 2262, 508)
+
+[node name="CeilingSpawn" type="Area2D" parent="SpikeSpawns"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="SpikeSpawns/CeilingSpawn"]
+position = Vector2(0, 244)
+polygon = PackedVector2Array(1398, -579, -3074, -595, -2214, -881, -1803, -1099, -705, -1227, 921, -1088)

@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-const SPEED = 150.0	
+const SPEED = 550.0	
 const JUMP_VELOCITY = -500.0
 const GRAVITY_MULTIPLIER = 0.9
 var virus_color = Color(0, 1, 0, 1)
@@ -25,9 +25,10 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 
-	if not is_on_surface():
+	if not is_on_surface() and is_player_self_controlled:
 		velocity.y += gravity * GRAVITY_MULTIPLIER * delta
-		print(velocity.y)
+	elif not is_player_self_controlled():
+		velocity.y += abs(gravity) * GRAVITY_MULTIPLIER * delta
 
 
 	if not controller:
@@ -57,6 +58,8 @@ func jump() -> void:
 		velocity.y = JUMP_VELOCITY
 		
 func change_surface() -> void:
+	if not is_player_self_controlled():
+		return
 	if is_on_surface():
 		if controller.controlled_pawn.has_node("AnimatedSprite2D"):
 			$AnimatedSprite2D.play("Change_Surface")

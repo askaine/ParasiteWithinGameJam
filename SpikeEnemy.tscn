@@ -1,0 +1,45 @@
+[gd_scene load_steps=8 format=3 uid="uid://b2copr85lkje8"]
+
+[ext_resource type="Script" uid="uid://ooiqklebv66c" path="res://scripts/Health.gd" id="1_hilb5"]
+[ext_resource type="Script" uid="uid://erk1psqh1t6e" path="res://scripts/Pawn.gd" id="1_lhjx4"]
+
+[sub_resource type="Gradient" id="Gradient_ofq16"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_lhjx4"]
+gradient = SubResource("Gradient_ofq16")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lrjd2"]
+radius = 222.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_23nck"]
+radius = 743.363
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r33wb"]
+size = Vector2(256, 158)
+
+[node name="SpikeEnemy" type="CharacterBody2D" groups=["Enemy"]]
+script = ExtResource("1_lhjx4")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, 78.25)
+scale = Vector2(1, 157.5)
+texture = SubResource("GradientTexture1D_lhjx4")
+
+[node name="InteractionArea" type="Area2D" parent="."]
+z_index = 20
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
+shape = SubResource("CircleShape2D_lrjd2")
+
+[node name="DetectionArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
+shape = SubResource("CircleShape2D_23nck")
+
+[node name="Health" type="Node2D" parent="."]
+script = ExtResource("1_hilb5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 78)
+shape = SubResource("RectangleShape2D_r33wb")

@@ -15,11 +15,11 @@
 [ext_resource type="Script" uid="uid://cu6tsp61jwldc" path="res://scripts/EnemyController.gd" id="10_wse8f"]
 [ext_resource type="Script" uid="uid://b7c3lluw5qn0j" path="res://scripts/AllyController.gd" id="11_ic0uy"]
 
-[sub_resource type="Gradient" id="Gradient_tlwt5"]
+[sub_resource type="Gradient" id="Gradient_70uel"]
 colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_aqk2v"]
-gradient = SubResource("Gradient_tlwt5")
+gradient = SubResource("Gradient_70uel")
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.5, 0)
@@ -189,13 +189,13 @@ action_name = "Infect"
 shape = SubResource("CircleShape2D_70uel")
 
 [node name="ShooterEnemy" parent="Enemies" instance=ExtResource("7_70uel")]
-position = Vector2(112, -206)
+position = Vector2(-360, -187)
 
 [node name="Player" type="Node2D" parent="."]
 position = Vector2(-431, -12)
 
 [node name="Player" parent="Player" instance=ExtResource("1_fj7yv")]
-position = Vector2(2, -86)
+position = Vector2(718, -110)
 scale = Vector2(0.5, 0.5)
 
 [node name="ForeGround" type="Node2D" parent="."]

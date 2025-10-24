@@ -1,6 +1,6 @@
 extends Node
 
-@export var max_hp: int = 100
+@export var max_hp: int = 50
 @export var attack_damage: int = 10
 
 var current_hp: int
@@ -13,6 +13,7 @@ func _ready() -> void:
 # Take damage
 func take_damage(amount: int) -> void:
 	current_hp -= amount
+	print(current_hp)
 	if current_hp <= 0:
 		current_hp = 0
 		die()

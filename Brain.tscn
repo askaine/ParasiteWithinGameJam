@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://cj8ny3n7dmrwr"]
+
+[sub_resource type="Gradient" id="Gradient_ct35m"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_sv4tq"]
+gradient = SubResource("Gradient_ct35m")
+
+[sub_resource type="Gradient" id="Gradient_sv4tq"]
+colors = PackedColorArray(1, 0, 0, 1, 1, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_m3pcs"]
+gradient = SubResource("Gradient_sv4tq")
+
+[node name="Brain" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, 2.5)
+scale = Vector2(3.69531, 585)
+texture = SubResource("GradientTexture1D_sv4tq")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(107, 95)
+scale = Vector2(0.5, 100)
+texture = SubResource("GradientTexture1D_m3pcs")
+
+[node name="Sprite2D3" type="Sprite2D" parent="."]
+position = Vector2(312, -113)
+scale = Vector2(0.5, 100)
+texture = SubResource("GradientTexture1D_m3pcs")
+
+[node name="Sprite2D4" type="Sprite2D" parent="."]
+position = Vector2(-252, -97)
+scale = Vector2(0.5, 100)
+texture = SubResource("GradientTexture1D_m3pcs")

@@ -2,11 +2,12 @@ extends Node
 
 var controlled_pawns: Array[CharacterBody2D] = []
 
-@export var speed: float = 100.0
+@export var speed: float = 200.0
 @export var max_target_distance: float = 5000.0  
 var enemy_ai_map = {
 	"FirstEnemy": "FirstEnemyAi",
 	"ShooterEnemy": "ShooterEnemyAi",
+	
 }
 
 func _process(delta: float) -> void:
@@ -18,7 +19,10 @@ func _process(delta: float) -> void:
 			var func_name = enemy_ai_map[type_name]
 			if has_method(func_name):
 				call(func_name, enemy, delta)
-	
+
+
+##-----First Enemy Ai-----#
+
 
 func FirstEnemyAi(enemy: Node,delta: float) -> void:
 		if not enemy or not enemy.is_in_group("Enemy"):
@@ -45,8 +49,16 @@ func FirstEnemyAi(enemy: Node,delta: float) -> void:
 		if sprite:
 			sprite.flip_h = body.velocity.x < 0
 
+##-----First Enemy Ai-----#
+
+
+#-----Shooter Enemy Ai-----#
+
+
 func ShooterEnemyAi(enemy: Node, delta: float) -> void:
 	var target = get_current_target()
+	if not enemy.is_player_self_controlled():
+			target = get_node("/root/World/GameController").possessing_pawn
 	if not target:
 		stop_movement(enemy)
 		return
@@ -109,6 +121,8 @@ func shoot_at(enemy: Node, target: Node) -> void:
 	if not spawner.has_method("shoot"):
 		return
 	spawner.shoot(target.global_position)
+
+#-----Shooter Enemy Ai-----#
 
 
 func add_pawn(pawn: Node) -> void:

@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="ParasiteWhitin"
-run/main_scene="uid://bbw6wp8t316yo"
+run/main_scene="uid://dubc88y1xkiub"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 

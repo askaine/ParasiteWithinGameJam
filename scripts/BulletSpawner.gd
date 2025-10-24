@@ -25,6 +25,6 @@ func shoot(target_pos: Vector2) -> void:
 	bullet.global_position = global_position + direction * 16.0
 	bullet.direction = direction
 	bullet.speed = bullet_speed
-
+	
 	get_tree().current_scene.add_child(bullet)
 	cooldown = 1.0 / fire_rate
