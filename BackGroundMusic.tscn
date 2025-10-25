@@ -8,4 +8,5 @@ stereo = true
 
 [node name="BackGroundMusic" type="AudioStreamPlayer"]
 stream = SubResource("AudioStreamWAV_qtfsg")
+pitch_scale = 0.3
 autoplay = true
