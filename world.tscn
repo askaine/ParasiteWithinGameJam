@@ -54,7 +54,7 @@ radius = 159.013
 [node name="World" type="Node2D"]
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
-color = Color(0.54099, 0.54099, 0.54099, 1)
+color = Color(0.136826, 0.136826, 0.136826, 1)
 
 [node name="Background" type="Node2D" parent="."]
 z_index = -4
@@ -66,21 +66,21 @@ polygon = PackedVector2Array(-4646, -2381, 9657, -2368, 9631, 2024, -5511, 2129)
 [node name="PointLight2D" type="PointLight2D" parent="Background"]
 position = Vector2(-411, -198)
 scale = Vector2(12.8594, 12.0234)
-energy = 1.3
+energy = 2.0
 range_z_max = -4
 texture = SubResource("GradientTexture2D_aqk2v")
 
 [node name="PointLight2D2" type="PointLight2D" parent="Background"]
 position = Vector2(756, 8.99997)
 scale = Vector2(12.8594, 12.0234)
-energy = 1.3
+energy = 2.0
 range_z_max = -4
 texture = SubResource("GradientTexture2D_aqk2v")
 
 [node name="PointLight2D3" type="PointLight2D" parent="Background"]
 position = Vector2(1324, -305)
 scale = Vector2(12.8594, 12.0234)
-energy = 1.3
+energy = 2.0
 range_z_max = -4
 texture = SubResource("GradientTexture2D_aqk2v")
 
@@ -127,6 +127,14 @@ rotation = 2.32075
 scale = Vector2(0.615789, 0.779272)
 texture = ExtResource("6_dwbse")
 flip_h = true
+
+[node name="Player" type="Node2D" parent="."]
+z_index = -1
+position = Vector2(-431, -12)
+
+[node name="Player" parent="Player" instance=ExtResource("1_fj7yv")]
+position = Vector2(718, -110)
+scale = Vector2(0.5, 0.5)
 
 [node name="RoofTiles" type="Node2D" parent="."]
 z_index = -1
@@ -195,13 +203,6 @@ shape = SubResource("CircleShape2D_70uel")
 
 [node name="ShooterEnemy" parent="Enemies" instance=ExtResource("7_70uel")]
 position = Vector2(-360, -187)
-
-[node name="Player" type="Node2D" parent="."]
-position = Vector2(-431, -12)
-
-[node name="Player" parent="Player" instance=ExtResource("1_fj7yv")]
-position = Vector2(718, -110)
-scale = Vector2(0.5, 0.5)
 
 [node name="ForeGround" type="Node2D" parent="."]
 
