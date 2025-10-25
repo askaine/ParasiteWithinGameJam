@@ -1,4 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://cj8ny3n7dmrwr"]
+[gd_scene load_steps=7 format=3 uid="uid://cj8ny3n7dmrwr"]
+
+[ext_resource type="Script" uid="uid://c3o64iuy3usbq" path="res://scripts/Brain.gd" id="1_sv4tq"]
+[ext_resource type="Script" uid="uid://by8ew23w2i52k" path="res://scripts/BrainWeakPoint.gd" id="2_m3pcs"]
 
 [sub_resource type="Gradient" id="Gradient_ct35m"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
@@ -13,23 +16,54 @@ colors = PackedColorArray(1, 0, 0, 1, 1, 0, 0, 1)
 gradient = SubResource("Gradient_sv4tq")
 
 [node name="Brain" type="Node2D"]
+script = ExtResource("1_sv4tq")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, 2.5)
 scale = Vector2(3.69531, 585)
 texture = SubResource("GradientTexture1D_sv4tq")
 
-[node name="Sprite2D2" type="Sprite2D" parent="."]
+[node name="Area2D" type="Area2D" parent="." groups=["WeakPoint"]]
+script = ExtResource("2_m3pcs")
+
+[node name="WeakPoint1" type="Sprite2D" parent="Area2D"]
 position = Vector2(107, 95)
 scale = Vector2(0.5, 100)
 texture = SubResource("GradientTexture1D_m3pcs")
 
-[node name="Sprite2D3" type="Sprite2D" parent="."]
-position = Vector2(312, -113)
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+position = Vector2(107, 95)
+scale = Vector2(0.5, 100)
+polygon = PackedVector2Array(-128, -0.5, -128, 0.5, 128, 0.5, 128, -0.5)
+
+[node name="Area2D2" type="Area2D" parent="." groups=["WeakPoint"]]
+position = Vector2(204, -206)
+script = ExtResource("2_m3pcs")
+
+[node name="WeakPoint1" type="Sprite2D" parent="Area2D2"]
+position = Vector2(107, 95)
 scale = Vector2(0.5, 100)
 texture = SubResource("GradientTexture1D_m3pcs")
 
-[node name="Sprite2D4" type="Sprite2D" parent="."]
-position = Vector2(-252, -97)
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D2"]
+position = Vector2(107, 95)
+scale = Vector2(0.5, 100)
+polygon = PackedVector2Array(-128, -0.5, -128, 0.5, 128, 0.5, 128, -0.5)
+
+[node name="Area2D3" type="Area2D" parent="." groups=["WeakPoint"]]
+position = Vector2(-359, -193)
+script = ExtResource("2_m3pcs")
+
+[node name="WeakPoint1" type="Sprite2D" parent="Area2D3"]
+position = Vector2(107, 95)
 scale = Vector2(0.5, 100)
 texture = SubResource("GradientTexture1D_m3pcs")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D3"]
+position = Vector2(107, 95)
+scale = Vector2(0.5, 100)
+polygon = PackedVector2Array(-128, -0.5, -128, 0.5, 128, 0.5, 128, -0.5)
+
+[connection signal="area_entered" from="Area2D" to="Area2D" method="_on_area_entered"]
+[connection signal="area_entered" from="Area2D2" to="Area2D2" method="area_entered"]
+[connection signal="area_entered" from="Area2D3" to="Area2D3" method="area_entered"]

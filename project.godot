@@ -11,13 +11,14 @@ config_version=5
 [application]
 
 config/name="ParasiteWhitin"
-run/main_scene="uid://dubc88y1xkiub"
+run/main_scene="uid://bbw6wp8t316yo"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
 InteractionManager="*res://interactionManager.tscn"
+BackGroundMusic="*res://BackGroundMusic.tscn"
 
 [dotnet]
 
@@ -28,6 +29,8 @@ project/assembly_name="ParasiteWhitin"
 Enemy=""
 Player=""
 Ally=""
+PlayerAttack=""
+WeakPoint=""
 
 [input]
 

@@ -41,86 +41,39 @@ func _on_cooldown_done() -> void:
 func possess(new_pawn: Node) -> void:
 	if not can_possess or not new_pawn:
 		return
-	
-	
+
 	can_possess = false
 	cooldown_timer.start()
-	
 
-	if current_pawn == original_player:
-		original_player.visible = false
-		original_player.set_physics_process(false)
-		original_player.get_node("CollisionShape2D").disabled = true
-		original_player.global_position = new_pawn.global_position + Vector2(0, -50)
+	# Ensure we only allow the original player to eat enemies
+	if current_pawn != original_player:
+		return
 
+	# Make sure new_pawn is a valid enemy
+	if not new_pawn.is_in_group("Enemy"):
+		return
+
+	# Stop the enemy AI (if it has one)
 	if enemy_controller.has_method("remove_pawn"):
 		enemy_controller.remove_pawn(new_pawn)
-	if ally_controller.has_method("remove_pawn"):
-		ally_controller.remove_pawn(new_pawn)
 
-	if current_pawn:
-		current_pawn.controller = null
+	# Move player slightly toward the target (simulate jump-engulf)
+	var tween = create_tween()
+	tween.tween_property(original_player, "global_position", new_pawn.global_position, 0.25)
 
-	new_pawn.controller = player_controller
-	player_controller.controlled_pawn = new_pawn
-	current_pawn = new_pawn
+	# Play the engulf animation (handled in player)
+	if original_player.has_method("play_engulf_animation"):
+		original_player.play_engulf_animation()
 
-	camera.reparent(new_pawn)
-	camera.global_position = new_pawn.global_position
-
-	for g in current_pawn.get_groups():
-		current_pawn.remove_from_group(g)
-	current_pawn.add_to_group("Player")
-	current_pawn.green_tint()
-	possessing_pawn = current_pawn
+	# Queue up the “eat” after animation finishes
+	tween.tween_callback(func ():
+		if is_instance_valid(new_pawn):
+			new_pawn.queue_free() # Enemy disappears (eaten)
+		if original_player.get_controller().has_method("add_boost"):
+			original_player.get_controller().add_boost()
+	)
 
 
 
-func unpossess() -> void:
-	if current_pawn == original_player:
-		return  
-	current_pawn.possessing = false
-	var possessed_pawn = current_pawn
 
-	# Turn possessed pawn into an ally
-	for g in possessed_pawn.get_groups():
-		possessed_pawn.remove_from_group(g)
-	possessed_pawn.add_to_group("Ally")
-
-	possessed_pawn.controller = ally_controller
-	if ally_controller.has_method("add_pawn"):
-		ally_controller.add_pawn(possessed_pawn)
-
-	# Restore player
-	current_pawn = original_player
-	current_pawn.controller = player_controller
-	player_controller.controlled_pawn = original_player
-	original_player.visible = true
-	original_player.set_physics_process(true)
-	if original_player.has_node("CollisionShape2D"):
-		original_player.get_node("CollisionShape2D").disabled = false
-
-	# --- CORRECT POSITION ---
-	var direction = 1
-	if abs(possessed_pawn.velocity.x) > 0.1:
-		direction = -1 if possessed_pawn.velocity.x < 0 else 1
-	else:
-		direction = -1 if original_player.global_position.x < possessed_pawn.global_position.x else 1
-
-	var pawn_shape = possessed_pawn.get_node_or_null("CollisionShape2D")
-	var player_shape = original_player.get_node_or_null("CollisionShape2D")
-	var pawn_width = 0.0
-	var player_width = 0.0
-
-	if pawn_shape and pawn_shape.shape is RectangleShape2D:
-		pawn_width = pawn_shape.shape.extents.x * 2
-	if player_shape and player_shape.shape is RectangleShape2D:
-		player_width = player_shape.shape.extents.x * 2
-
-	# Use the possessed pawn’s position as reference, not original_player’s old position
-	original_player.global_position.x = possessed_pawn.global_position.x + direction * (pawn_width/2 + player_width/2 + 5)
-	original_player.global_position.y = possessed_pawn.global_position.y - 50
-
-	# Reparent camera
-	camera.reparent(original_player)
-	camera.global_position = original_player.global_position
+	

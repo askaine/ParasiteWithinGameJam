@@ -104,7 +104,11 @@ func shoot_at(cords: Vector2) -> void:
 	var spawner = get_node("BulletSpawner")
 	if not spawner.has_method("shoot"):
 		return
-	spawner.shoot(cords)
+	spawner.shoot(cords,self)
 	
 func take_damage(amount: int) -> void:
 	self.get_node("Health").take_damage(amount)
+
+
+func get_controller() ->Node:
+	return controller

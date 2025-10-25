@@ -7,9 +7,20 @@ const TOTAL_NEURONS := 2
 @export var spikes_per_area := 3
 
 var spikes_started := false
+signal _mini_game_finished
 
 # --- READY ---
 func _ready():
+	await get_tree().process_frame
+	var bounds = Rect2()
+	for child in get_children():
+		if child is Node2D:
+			bounds = bounds.expand(child.position)
+
+	# Move content so it's centered on origin
+	for child in get_children():
+		if child is Node2D:
+			child.position -= bounds.position + bounds.size / 2
 	# Connect neuron signals and initialize
 	for neuron in $Neurons.get_children():
 		neuron.set("activated", false)
@@ -48,8 +59,12 @@ func _on_neuron_entered(body: Node, neuron: Node):
 
 	# Spawn platforms and disable spikes after both neurons are activated
 	if neurons_activated >= TOTAL_NEURONS:
+		var brain = get_node("Brain/Brain")
+		if brain:
+			brain.enable_weakpoints()
 		_spawn_platforms()
 		_disable_spikes()
+		
 
 # --- PLATFORM SPAWN ---
 func _spawn_platforms():
@@ -90,7 +105,6 @@ func _spawn_spikes_from_area(area: Area2D, ceiling=false):
 		push_error("CollisionPolygon2D in " + str(area) + " has empty polygon!")
 		return
 
-	# Determine bounding box
 	var min_x = poly[0].x
 	var max_x = poly[0].x
 	var min_y = poly[0].y
@@ -101,11 +115,10 @@ func _spawn_spikes_from_area(area: Area2D, ceiling=false):
 		min_y = min(min_y, point.y)
 		max_y = max(max_y, point.y)
 
-	var global_pos = poly_node.global_position
-	var rect_pos = Vector2(global_pos.x + min_x, global_pos.y + min_y)
+	var local_pos = poly_node.position
+	var rect_pos = local_pos + Vector2(min_x, min_y)
 	var rect_size = Vector2(max_x - min_x, max_y - min_y)
 
-	# Spawn spikes evenly along width
 	for i in range(spikes_per_area):
 		var spike_instance = SpikeScene.instantiate()
 		var x_pos = rect_pos.x + rect_size.x * (i + 0.5) / spikes_per_area
@@ -114,10 +127,21 @@ func _spawn_spikes_from_area(area: Area2D, ceiling=false):
 
 		spike_instance.position = Vector2(x_pos, start_y)
 		spike_instance.setup(spike_instance.position, Vector2(x_pos, end_y), ceiling)
-		add_child(spike_instance)
-		spike_instance.extend()
+
+		# Add spike to the tree first
+		call_deferred("_add_and_extend_spike", spike_instance)
+
+# Helper function deferred to ensure tree is ready
+func _add_and_extend_spike(spike_instance: Node2D):
+	add_child(spike_instance)
+	spike_instance.extend()
+
 
 func _disable_spikes():
 	for spike in get_children():
 		if spike.is_class("Node2D") and spike.has_method("fade_out_and_disable"):
 			spike.fade_out_and_disable()
+
+
+func end_mini_game():
+	emit_signal("_mini_game_finished")			

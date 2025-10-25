@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://bbw6wp8t316yo"]
+[gd_scene load_steps=26 format=3 uid="uid://bbw6wp8t316yo"]
 
 [ext_resource type="Texture2D" uid="uid://drj7yyfgprp25" path="res://Assets/Tiles/TileAtlas.png" id="1_f3sb7"]
 [ext_resource type="PackedScene" uid="uid://di3ekj27o7rs1" path="res://character.tscn" id="1_fj7yv"]
@@ -14,6 +14,9 @@
 [ext_resource type="Script" uid="uid://sh5jchf1rfwa" path="res://scripts/PlayerController.gd" id="8_gbfbk"]
 [ext_resource type="Script" uid="uid://cu6tsp61jwldc" path="res://scripts/EnemyController.gd" id="10_wse8f"]
 [ext_resource type="Script" uid="uid://b7c3lluw5qn0j" path="res://scripts/AllyController.gd" id="11_ic0uy"]
+[ext_resource type="PackedScene" uid="uid://dubc88y1xkiub" path="res://InfectMiniGame.tscn" id="15_hiqwa"]
+[ext_resource type="PackedScene" uid="uid://bkefu75s8t45p" path="res://BackGroundMusic.tscn" id="16_2u3nc"]
+[ext_resource type="AudioStream" uid="uid://cvtxa3ewtnigs" path="res://Sound/Music/ParasiteWhitinMusic.mp3" id="17_ikiii"]
 
 [sub_resource type="Gradient" id="Gradient_70uel"]
 colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
@@ -45,6 +48,8 @@ sources/0 = SubResource("TileSetAtlasSource_fj7yv")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_70uel"]
 radius = 159.013
+
+[sub_resource type="GDScript" id="GDScript_udxuc"]
 
 [node name="World" type="Node2D"]
 
@@ -288,6 +293,7 @@ script = ExtResource("7_pkg7o")
 
 [node name="PlayerController" type="Node2D" parent="GameController"]
 script = ExtResource("8_gbfbk")
+MiniGameScene = ExtResource("15_hiqwa")
 
 [node name="Camera2D" type="Camera2D" parent="GameController"]
 position = Vector2(4, -145)
@@ -298,3 +304,10 @@ script = ExtResource("10_wse8f")
 
 [node name="AllyController" type="Node2D" parent="GameController"]
 script = ExtResource("11_ic0uy")
+
+[node name="Node2D" type="Node2D" parent="."]
+position = Vector2(-15371, -7606)
+
+[node name="BackGroundMusic" parent="." instance=ExtResource("16_2u3nc")]
+stream = ExtResource("17_ikiii")
+script = SubResource("GDScript_udxuc")

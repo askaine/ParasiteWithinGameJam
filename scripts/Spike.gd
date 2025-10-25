@@ -8,6 +8,9 @@ var start_position := Vector2.ZERO
 var end_position := Vector2.ZERO
 var is_ceiling := false
 
+
+
+
 func setup(start_pos: Vector2, end_pos_global: Vector2, ceiling: bool):
 	is_ceiling = ceiling
 	start_position = start_pos

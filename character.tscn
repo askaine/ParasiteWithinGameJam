@@ -113,3 +113,4 @@ shape = SubResource("CapsuleShape2D_jb3kq")
 [node name="BulletSpawner" type="Node2D" parent="."]
 script = ExtResource("11_7tnxx")
 bullet_scene = ExtResource("12_bwfjh")
+fire_rate = 0.8

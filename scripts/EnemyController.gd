@@ -3,7 +3,8 @@ extends Node
 var controlled_pawns: Array[CharacterBody2D] = []
 
 @export var speed: float = 200.0
-@export var max_target_distance: float = 5000.0  
+@export var detection_range: float = 800.0 
+@export var max_target_distance: float = 800.0  
 var enemy_ai_map = {
 	"FirstEnemy": "FirstEnemyAi",
 	"ShooterEnemy": "ShooterEnemyAi",
@@ -49,7 +50,7 @@ func FirstEnemyAi(enemy: Node,delta: float) -> void:
 		if sprite:
 			sprite.flip_h = body.velocity.x < 0
 
-##-----First Enemy Ai-----#
+#-----First Enemy Ai-----#
 
 
 #-----Shooter Enemy Ai-----#
@@ -58,19 +59,23 @@ func FirstEnemyAi(enemy: Node,delta: float) -> void:
 func ShooterEnemyAi(enemy: Node, delta: float) -> void:
 	var target = get_current_target()
 	if not enemy.is_player_self_controlled():
-			target = get_node("/root/World/GameController").possessing_pawn
+		target = get_node("/root/World/GameController").possessing_pawn
+
 	if not target:
 		stop_movement(enemy)
 		return
 
-	if not is_target_in_range(enemy, target, 500): # 500 pixels shooting range
-		move_towards(enemy, target, 100) # move closer
+	if not is_target_in_range(enemy, target, detection_range):
+		stop_movement(enemy)
 		return
 
-	# Check line of sight
+	if not is_target_in_range(enemy, target, 500): 
+		move_towards(enemy, target, 100) 
+		return
+
 	if has_line_of_sight(enemy, target):
 		stop_movement(enemy)
-		enemy.shoot_at(target.global_position)
+		enemy.shoot_at(target.get_node("CollisionShape2D").global_position)
 	else:
 		move_towards(enemy, target, 50) # move closer slowly if blocked
 

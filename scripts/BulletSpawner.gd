@@ -13,7 +13,7 @@ func _physics_process(delta: float) -> void:
 	if cooldown > 0:
 		cooldown -= delta
 
-func shoot(target_pos: Vector2) -> void:
+func shoot(target_pos: Vector2,shooter: Node) -> void:
 	if cooldown > 0:
 		return
 	if not bullet_scene:
@@ -25,6 +25,6 @@ func shoot(target_pos: Vector2) -> void:
 	bullet.global_position = global_position + direction * 16.0
 	bullet.direction = direction
 	bullet.speed = bullet_speed
-	
+	bullet.shooter = shooter
 	get_tree().current_scene.add_child(bullet)
 	cooldown = 1.0 / fire_rate
