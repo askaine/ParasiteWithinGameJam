@@ -15,6 +15,7 @@ func _ready() -> void:
 func take_damage(amount: int) -> void:
 	current_hp -= amount
 	print(get_parent().name, "Health - ", current_hp)
+	hit_flash(get_parent().get_node("AnimatedSprite2D"))
 	if current_hp <= 0:
 		current_hp = 0
 		die()
@@ -43,3 +44,27 @@ func die() -> void:
 	emit_signal("died")
 	# Remove parent node from scene tree
 	
+
+
+func hit_flash(sprite: AnimatedSprite2D, duration: float = 0.2, flash_color: Color = Color(1, 1, 1)) -> void:
+	# Make sure the sprite has a unique ShaderMaterial
+	var shader : Shader = preload("res://Shaders/hit_flash_shader.gdshader")
+	var mat := ShaderMaterial.new()
+	mat.shader = shader
+	sprite.material = mat
+
+	mat.set_shader_parameter("flash_color", flash_color)
+	mat.set_shader_parameter("flash_strength", 0.0)
+
+	var tween := create_tween()
+	var half_dur := duration / 2.0
+
+	# Fade in
+	tween.tween_property(mat, "shader_parameter/flash_strength", 2.0, half_dur).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	# Fade out
+	tween.tween_property(mat, "shader_parameter/flash_strength", 0.0, half_dur).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
+
+	await tween.finished
+
+	# Optionally remove shader after done
+	sprite.material = null

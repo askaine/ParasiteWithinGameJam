@@ -9,22 +9,23 @@ func _physics_process(delta: float) -> void:
 	if direction == Vector2.ZERO:
 		return
 	global_position += direction * speed * delta
+	
 	if shooter:
 		var controller = shooter.get_controller()
 		if controller:
 			if controller.has_method("handle_input"):
 				add_to_group("PlayerAttack")
- 
 
-	
-	
 
 func _on_body_entered(body: Node) -> void:
-	if body.has_node("Health") and body != shooter:
-		var health = body.get_node("Health")
-		health.take_damage(damage)
-		queue_free()
-	elif shooter.is_in_group("Enemy") and body.is_in_group("Enemy"): 
+	if body == shooter:
+		return  
+		
+	if shooter.is_in_group("Enemy") and body.is_in_group("Enemy"):
 		pass
-	elif body != shooter:
+	elif body.has_method("take_damage"):
+		var horizontal_dir = sign(direction.x) if direction.x != 0 else 1
+		body.take_damage(damage, horizontal_dir)
+		queue_free()
+	else:
 		queue_free()

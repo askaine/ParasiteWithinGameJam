@@ -238,8 +238,7 @@ func attack() -> void:
 	# Apply damage to hit targets
 	for target in hit_targets:
 		if target.has_method("take_damage"):
-			target.take_damage(melee_damage)
-			target.knockback(Vector2(facing_direction * -20000000, 100)) #not finished (TO DO)
+			target.take_damage(melee_damage,facing_direction)
 		elif target.has_method("_take_damage"):
 			target._take_damage(1)
 
@@ -257,7 +256,7 @@ func _mini_game_finished():
 	# Unpause main scene
 	get_tree().paused = false
 	in_mini_game = false
-	get_node("/root/World/GameController").camera.zoom = Vector2(1, 1)
+	get_node("/root/World/GameController").camera.zoom = Vector2(0.4, 0.4)
 	gc.possess(nearest)
 	
 	
@@ -267,7 +266,6 @@ func add_boost():
 	boost_count += 1
 
 	# Heal + Damage Boost
-	print(controlled_pawn)
 	if controlled_pawn.has_node("Health"):
 		var health = controlled_pawn.get_node("Health")
 		health.current_hp = min(health.current_hp + 10, health.max_hp + 10)
@@ -278,3 +276,4 @@ func add_boost():
 	scale *= 1.5
 
 	print("Boost gained! Total boosts:", boost_count)
+	

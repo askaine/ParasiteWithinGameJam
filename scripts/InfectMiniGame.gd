@@ -126,6 +126,11 @@ func _spawn_spikes_from_area(area: Area2D, ceiling=false):
 		var end_y = rect_pos.y if ceiling else rect_pos.y + rect_size.y
 
 		spike_instance.position = Vector2(x_pos, start_y)
+
+		# --- NEW: Rotate upside down if spawning from ceiling ---
+		if ceiling:
+			spike_instance.rotation = PI  # 180 degrees
+
 		spike_instance.setup(spike_instance.position, Vector2(x_pos, end_y), ceiling)
 
 		# Add spike to the tree first

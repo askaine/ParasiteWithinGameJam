@@ -1,24 +1,19 @@
-[gd_scene load_steps=4 format=3 uid="uid://6kmuogno8xtm"]
+[gd_scene load_steps=3 format=3 uid="uid://6kmuogno8xtm"]
 
 [ext_resource type="Script" uid="uid://cyqci0k341y7" path="res://scripts/Bullet.gd" id="1_n7xfj"]
-
-[sub_resource type="Gradient" id="Gradient_x3e43"]
-colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_ayd6b"]
-gradient = SubResource("Gradient_x3e43")
+[ext_resource type="Texture2D" uid="uid://biibkp78es04w" path="res://Assets/Projectiles/PlayerProjectile.png" id="2_1y6vq"]
 
 [node name="Bullet" type="Area2D"]
 script = ExtResource("1_n7xfj")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, -13.75)
-scale = Vector2(0.1, 10)
-texture = SubResource("GradientTexture1D_ayd6b")
+position = Vector2(0, -17)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_1y6vq")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-position = Vector2(0, -13.75)
-scale = Vector2(0.1, 10)
-polygon = PackedVector2Array(-128, -0.5, -128, 0.5, 128, 0.5, 128, -0.5)
+position = Vector2(0, -17)
+scale = Vector2(0.25, 0.25)
+polygon = PackedVector2Array(-18, -61, -18, -59.9, -29.2, -59, -32.6, -59, -37.5, -56, -40.7, -56, -59.7, -41, -61.9, -41, -75.9, -26, -77.3, -26, -89.2, 0, -90.7, 0, -97.7, 42, -99.5, 42, -96, 58.4, -96, 62.4, -81, 98.3, -81, 100.9, -37, 140.8, -37, 142.4, -5.39999, 154, 13.2, 154, 42.1, 147, 45.5, 147, 71.5, 134, 74.1, 134, 78.1, 128, 79.6, 128, 83, 113.2, 83, 109.4, 111.4, 36, 113, 36, 113, 19.7, 106, -3.3, 106, -6.60001, 99, -17.7, 99, -19.9, 89, -28.9, 89, -30.3, 37, -52.3, 37, -53.7, 3, -59.7, 3, -61)
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -16,7 +16,7 @@ func _ready() -> void:
 	player_controller = $PlayerController
 	original_player = get_node("/root/World/Player/Player")
 	current_pawn = original_player
-
+	
 	camera.reparent(current_pawn)
 	camera.global_position = original_player.global_position
 

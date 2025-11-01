@@ -2,14 +2,18 @@ extends Node
 
 var controlled_pawns: Array[CharacterBody2D] = []
 
-@export var speed: float = 200.0
-@export var detection_range: float = 800.0 
-@export var max_target_distance: float = 800.0  
+var speed: float = 200.0
+var detection_range: float = 1200.0 
+var max_target_distance: float = 1500.0  
+var attack_damage: int = 10.0
+
 var enemy_ai_map = {
 	"FirstEnemy": "FirstEnemyAi",
 	"ShooterEnemy": "ShooterEnemyAi",
 	
 }
+
+
 
 func _process(delta: float) -> void:
 	for enemy in controlled_pawns:
@@ -28,25 +32,27 @@ func _process(delta: float) -> void:
 func FirstEnemyAi(enemy: Node,delta: float) -> void:
 		if not enemy or not enemy.is_in_group("Enemy"):
 			return
-
+		
 		var target = find_nearest_target(enemy)
 		var body := enemy as CharacterBody2D
 		if not body:
 			return
+		var sprite: AnimatedSprite2D = body.get_node_or_null("AnimatedSprite2D")
 		if not enemy.is_player_self_controlled():
 			target = get_node("/root/World/GameController").possessing_pawn
-		if target and (target.is_in_group("Player") or target.is_in_group("Ally")):
+		if target and (target.is_in_group("Player") or target.is_in_group("Ally")) and target.is_on_floor():
 			var dx = target.get_node("CollisionShape2D").global_position.x - body.get_node("CollisionShape2D").global_position.x
 			if abs(dx) <= max_target_distance:
 				body.velocity.x = sign(dx) * speed
+				sprite.play("Walk")
 			else:
 				body.velocity.x = 0
 		else:
 			body.velocity.x = 0
-
+		
 		body.move_and_slide()
-
-		var sprite: Sprite2D = body.get_node_or_null("Sprite2D")
+		
+		
 		if sprite:
 			sprite.flip_h = body.velocity.x < 0
 
@@ -69,7 +75,7 @@ func ShooterEnemyAi(enemy: Node, delta: float) -> void:
 		stop_movement(enemy)
 		return
 
-	if not is_target_in_range(enemy, target, 500): 
+	if not is_target_in_range(enemy, target, 900): 
 		move_towards(enemy, target, 100) 
 		return
 
@@ -77,7 +83,7 @@ func ShooterEnemyAi(enemy: Node, delta: float) -> void:
 		stop_movement(enemy)
 		enemy.shoot_at(target.get_node("CollisionShape2D").global_position)
 	else:
-		move_towards(enemy, target, 50) # move closer slowly if blocked
+		move_towards(enemy, target, 50) 
 
 func get_current_target() -> Node:
 	var gc = get_node("/root/World/GameController")
@@ -91,8 +97,10 @@ func move_towards(enemy: Node, target: Node, speed: float) -> void:
 	var dx = target.global_position.x - enemy.global_position.x
 	enemy.velocity.x = sign(dx) * speed
 	enemy.move_and_slide()
-	if enemy.has_node("Sprite2D"):
-		enemy.get_node("Sprite2D").flip_h = enemy.velocity.x < 0
+	var sprite: AnimatedSprite2D = enemy.get_node_or_null("AnimatedSprite2D")
+	if sprite:
+		sprite.flip_h = enemy.velocity.x < 0
+		sprite.play("Walk")
 
 func stop_movement(enemy: Node) -> void:
 	enemy.velocity.x = 0
@@ -157,3 +165,6 @@ func find_nearest_target(current_pawn: Node) -> Node:
 			closest = t
 
 	return closest
+	
+func get_attack_damage() -> int:
+	return attack_damage

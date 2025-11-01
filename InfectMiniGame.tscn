@@ -1,9 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://dubc88y1xkiub"]
+[gd_scene load_steps=16 format=3 uid="uid://dubc88y1xkiub"]
 
 [ext_resource type="Texture2D" uid="uid://djolneymkabpk" path="res://Assets/BackgroundAndForeGroundSillouets/Sillouet01.png" id="1_eeka6"]
 [ext_resource type="Script" uid="uid://dnmgiay0hg6yu" path="res://scripts/InfectMiniGame.gd" id="1_fvaar"]
 [ext_resource type="PackedScene" uid="uid://dd8k3amf1h1ah" path="res://Spike.tscn" id="2_axfi8"]
 [ext_resource type="PackedScene" uid="uid://cj8ny3n7dmrwr" path="res://Brain.tscn" id="2_lj1ig"]
+[ext_resource type="Texture2D" uid="uid://dliqwpv4xje2u" path="res://Assets/Roof/RoofAtlas.png" id="5_eeka6"]
+[ext_resource type="Texture2D" uid="uid://drj7yyfgprp25" path="res://Assets/Tiles/TileAtlas.png" id="6_lj1ig"]
 
 [sub_resource type="Gradient" id="Gradient_tlwt5"]
 colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
@@ -14,6 +16,15 @@ fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.5, 0)
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fvaar"]
+texture = ExtResource("5_eeka6")
+texture_region_size = Vector2i(600, 300)
+0:0/0 = 0
+1:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_axfi8"]
+sources/2 = SubResource("TileSetAtlasSource_fvaar")
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_lj1ig"]
 radius = 187.963
 
@@ -22,6 +33,16 @@ colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_fvaar"]
 gradient = SubResource("Gradient_lj1ig")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_v4307"]
+texture = ExtResource("6_lj1ig")
+texture_region_size = Vector2i(250, 250)
+0:0/0 = 0
+2:0/0 = 0
+1:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_ug7rh"]
+sources/0 = SubResource("TileSetAtlasSource_v4307")
 
 [node name="World" type="Node2D"]
 position = Vector2(654, 376)
@@ -88,7 +109,7 @@ z_index = 1
 position = Vector2(1259.46, -104.503)
 rotation = -0.0780369
 scale = Vector2(2.85764, 2.67187)
-energy = 1.3
+energy = 2.0
 range_z_max = -4
 texture = SubResource("GradientTexture2D_lj1ig")
 texture_scale = 3.0
@@ -98,7 +119,7 @@ z_index = 1
 position = Vector2(854.463, -340.983)
 rotation = -0.0780369
 scale = Vector2(2.85764, 2.67187)
-energy = 1.3
+energy = 2.0
 range_z_max = -4
 texture = SubResource("GradientTexture2D_lj1ig")
 texture_scale = 3.0
@@ -108,10 +129,22 @@ z_index = 1
 position = Vector2(268.155, -48.3853)
 rotation = -0.0780369
 scale = Vector2(2.85764, 2.67187)
-energy = 1.3
+energy = 2.0
 range_z_max = -4
 texture = SubResource("GradientTexture2D_lj1ig")
 texture_scale = 3.0
+
+[node name="RoofTiles" type="Node2D" parent="."]
+z_index = -1
+position = Vector2(0, -150)
+
+[node name="Tile01" type="Parallax2D" parent="RoofTiles"]
+scroll_offset = Vector2(0, 269)
+
+[node name="TileMap" type="TileMap" parent="RoofTiles/Tile01"]
+tile_set = SubResource("TileSet_axfi8")
+format = 2
+layer_0/tile_data = PackedInt32Array(-2949301, 2, 0, -3276965, 2, 0, -3604636, 65538, 0, -3801233, 2, 0, -4063370, 2, 0, -4391045, 65538, 0, -4718714, 65538, 0, -4980830, 65538, 0, -5111876, 2, 0, -5242924, 65538, 0, -5177360, 65538, 0, -5046259, 2, 0, -4849621, 2, 0, -4652987, 65538, 0, -4325301, 65538, 0, -3801005, 2, 0, -2883489, 2, 0, -2424728, 65538, 0, -1965974, 65538, 0, -1507219, 2, 0, -1245068, 65538, 0, -917385, 2, 0, -720775, 2, 0, -589701, 65538, 0, -196481, 65538, 0, 131, 65538, 0, -2621635, 2, 0, -2293959, 2, 0, -1900748, 2, 0, -1573077, 65538, 0, -1114330, 65538, 0, -655583, 65538, 0, -458976, 2, 0, -228, 2, 0)
 
 [node name="BlackTiles" type="Node2D" parent="."]
 z_index = -1
@@ -200,15 +233,29 @@ position = Vector2(-649, -360)
 scale = Vector2(3, 3)
 
 [node name="SpikeSpawns" type="Node2D" parent="."]
+z_index = -2
 
 [node name="FloorSpawn" type="Area2D" parent="SpikeSpawns"]
+position = Vector2(0, 310)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="SpikeSpawns/FloorSpawn"]
 position = Vector2(2000, -200)
 polygon = PackedVector2Array(1677, -97, -3604, -77, -3665, 427, 2262, 508)
 
 [node name="CeilingSpawn" type="Area2D" parent="SpikeSpawns"]
+position = Vector2(-479, 114)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="SpikeSpawns/CeilingSpawn"]
 position = Vector2(2400, 0)
 polygon = PackedVector2Array(1398, -579, -3074, -595, -2214, -881, -1803, -1099, -705, -1227, 921, -1088)
+
+[node name="GroundTiles" type="Node2D" parent="."]
+modulate = Color(0.521141, 0.521141, 0.521141, 1)
+z_index = 1
+
+[node name="Parallax2D" type="Parallax2D" parent="GroundTiles"]
+
+[node name="TileMap" type="TileMap" parent="GroundTiles/Parallax2D"]
+tile_set = SubResource("TileSet_ug7rh")
+format = 2
+layer_0/tile_data = PackedInt32Array(1048370, 131072, 0, 1048382, 65536, 0, 982875, 65536, 0, 917365, 65536, 0, 1179557, 65536, 0, 1048554, 65536, 0, 1048604, 65536, 0, 1048637, 65536, 0, 983078, 65536, 0, 1048565, 65536, 0, 1179587, 65536, 0, 1114061, 65536, 0, 1048666, 65536, 0, 1048690, 65536, 0, 983122, 0, 0, 917575, 0, 0, 917504, 0, 0, 1048543, 0, 0, 1114034, 0, 0, 917378, 0, 0, 1048472, 0, 0, 917353, 0, 0, 1048393, 65536, 0, 1048401, 65536, 0, 982924, 65536, 0, 1179579, 65536, 0, 1114068, 65536, 0, 983050, 65536, 0, 1048593, 65536, 0, 1048625, 65536, 0, 1048679, 65536, 0)

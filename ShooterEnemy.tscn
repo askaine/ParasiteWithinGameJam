@@ -1,15 +1,46 @@
-[gd_scene load_steps=10 format=3 uid="uid://cfsj2hr5504iq"]
+[gd_scene load_steps=16 format=3 uid="uid://cfsj2hr5504iq"]
 
 [ext_resource type="Script" uid="uid://erk1psqh1t6e" path="res://scripts/Pawn.gd" id="1_8v7ne"]
 [ext_resource type="Script" uid="uid://ooiqklebv66c" path="res://scripts/Health.gd" id="1_pu8uq"]
+[ext_resource type="Shader" uid="uid://ca1t2yox1dfii" path="res://Shaders/Enemy.gdshader" id="2_0tmwo"]
+[ext_resource type="Texture2D" uid="uid://cxvcb4k4cmh06" path="res://Assets/Enemies/WhiteCellEnemy/animation/Walk/Walk01.png" id="2_i0btk"]
 [ext_resource type="Script" uid="uid://cfv5r3ua22qpu" path="res://scripts/BulletSpawner.gd" id="2_o8ra1"]
+[ext_resource type="Texture2D" uid="uid://c10n30xr1lb4o" path="res://Assets/Enemies/WhiteCellEnemy/animation/Walk/Walk02.png" id="3_0tmwo"]
 [ext_resource type="PackedScene" uid="uid://cl6pxr8gyp530" path="res://Bullet.tscn" id="4_bkg2p"]
+[ext_resource type="Texture2D" uid="uid://ltwj8un0ynb1" path="res://Assets/Enemies/WhiteCellEnemy/animation/Walk/Walk03.png" id="4_nnk4b"]
+[ext_resource type="Script" uid="uid://6x4wvavgkv3a" path="res://EnemyHitBox.gd" id="9_nnk4b"]
 
-[sub_resource type="Gradient" id="Gradient_e6kq8"]
-colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nnk4b"]
+shader = ExtResource("2_0tmwo")
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_o8ra1"]
-gradient = SubResource("Gradient_e6kq8")
+[sub_resource type="SpriteFrames" id="SpriteFrames_4rc42"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_i0btk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_0tmwo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_nnk4b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_0tmwo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_i0btk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_0tmwo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_nnk4b")
+}],
+"loop": true,
+"name": &"Walk",
+"speed": 8.0
+}]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8v7ne"]
 radius = 222.0
@@ -17,16 +48,22 @@ radius = 222.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_bkg2p"]
 radius = 743.363
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_jvdf5"]
-size = Vector2(256, 158)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i0btk"]
+size = Vector2(221, 259)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4rc42"]
+size = Vector2(270, 259)
 
 [node name="ShooterEnemy" type="CharacterBody2D" groups=["Enemy"]]
+collision_mask = 32
 script = ExtResource("1_8v7ne")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, 78.25)
-scale = Vector2(1, 157.5)
-texture = SubResource("GradientTexture1D_o8ra1")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_nnk4b")
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_4rc42")
+animation = &"Walk"
+frame_progress = 0.734378
 
 [node name="InteractionArea" type="Area2D" parent="."]
 z_index = 20
@@ -42,11 +79,22 @@ shape = SubResource("CircleShape2D_bkg2p")
 [node name="Health" type="Node2D" parent="."]
 script = ExtResource("1_pu8uq")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 78)
-shape = SubResource("RectangleShape2D_jvdf5")
-
 [node name="BulletSpawner" type="Node2D" parent="."]
 position = Vector2(0, 77)
 script = ExtResource("2_o8ra1")
 bullet_scene = ExtResource("4_bkg2p")
+bullet_speed = 600.0
+fire_rate = 0.5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-4, 5.5)
+shape = SubResource("RectangleShape2D_i0btk")
+
+[node name="HitBox" type="Area2D" parent="."]
+script = ExtResource("9_nnk4b")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+position = Vector2(-2, 5.5)
+shape = SubResource("RectangleShape2D_4rc42")
+
+[connection signal="body_entered" from="HitBox" to="HitBox" method="_on_body_entered"]

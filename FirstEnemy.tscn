@@ -1,13 +1,44 @@
-[gd_scene load_steps=8 format=3 uid="uid://cakdbtxho1uw6"]
+[gd_scene load_steps=14 format=3 uid="uid://cakdbtxho1uw6"]
 
 [ext_resource type="Script" uid="uid://erk1psqh1t6e" path="res://scripts/Pawn.gd" id="1_ofq16"]
 [ext_resource type="Script" uid="uid://ooiqklebv66c" path="res://scripts/Health.gd" id="2_hyv26"]
+[ext_resource type="Texture2D" uid="uid://cxvcb4k4cmh06" path="res://Assets/Enemies/WhiteCellEnemy/animation/Walk/Walk01.png" id="2_swmbc"]
+[ext_resource type="Shader" uid="uid://ca1t2yox1dfii" path="res://Shaders/Enemy.gdshader" id="2_yv0r1"]
+[ext_resource type="Texture2D" uid="uid://c10n30xr1lb4o" path="res://Assets/Enemies/WhiteCellEnemy/animation/Walk/Walk02.png" id="3_yv0r1"]
+[ext_resource type="Texture2D" uid="uid://ltwj8un0ynb1" path="res://Assets/Enemies/WhiteCellEnemy/animation/Walk/Walk03.png" id="4_ea0fc"]
+[ext_resource type="Script" uid="uid://6x4wvavgkv3a" path="res://EnemyHitBox.gd" id="7_ea0fc"]
 
-[sub_resource type="Gradient" id="Gradient_ofq16"]
-colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ea0fc"]
+shader = ExtResource("2_yv0r1")
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_uape3"]
-gradient = SubResource("Gradient_ofq16")
+[sub_resource type="SpriteFrames" id="SpriteFrames_ofq16"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_swmbc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_yv0r1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_ea0fc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_yv0r1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_swmbc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_yv0r1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_ea0fc")
+}],
+"loop": true,
+"name": &"Walk",
+"speed": 8.0
+}]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_e6kq8"]
 radius = 222.0
@@ -16,15 +47,21 @@ radius = 222.0
 radius = 743.363
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8v7th"]
-size = Vector2(256, 158)
+size = Vector2(221, 259)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ea0fc"]
+size = Vector2(270, 259)
 
 [node name="CharacterBody2D" type="CharacterBody2D" groups=["Enemy"]]
+collision_mask = 32
 script = ExtResource("1_ofq16")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, 78.25)
-scale = Vector2(1, 157.5)
-texture = SubResource("GradientTexture1D_uape3")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_ea0fc")
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_ofq16")
+animation = &"Walk"
+frame_progress = 0.423057
 
 [node name="InteractionArea" type="Area2D" parent="."]
 z_index = 20
@@ -41,5 +78,14 @@ shape = SubResource("CircleShape2D_uape3")
 script = ExtResource("2_hyv26")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 78)
+position = Vector2(-4, 5.5)
 shape = SubResource("RectangleShape2D_8v7th")
+
+[node name="HitBox" type="Area2D" parent="."]
+script = ExtResource("7_ea0fc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+position = Vector2(-2, 5.5)
+shape = SubResource("RectangleShape2D_ea0fc")
+
+[connection signal="body_entered" from="HitBox" to="HitBox" method="_on_body_entered"]

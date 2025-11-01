@@ -1,9 +1,8 @@
-[gd_scene load_steps=26 format=3 uid="uid://bbw6wp8t316yo"]
+[gd_scene load_steps=25 format=3 uid="uid://bbw6wp8t316yo"]
 
 [ext_resource type="Texture2D" uid="uid://drj7yyfgprp25" path="res://Assets/Tiles/TileAtlas.png" id="1_f3sb7"]
 [ext_resource type="PackedScene" uid="uid://di3ekj27o7rs1" path="res://character.tscn" id="1_fj7yv"]
 [ext_resource type="Texture2D" uid="uid://dliqwpv4xje2u" path="res://Assets/Roof/RoofAtlas.png" id="1_tlwt5"]
-[ext_resource type="Texture2D" uid="uid://bv33pxmd8n4gr" path="res://Assets/Tiles/TileGround.png" id="3_k3n1d"]
 [ext_resource type="Texture2D" uid="uid://dt0ccnp3ml0r4" path="res://Assets/Tiles/Tile01.png" id="4_aqk2v"]
 [ext_resource type="Texture2D" uid="uid://dexglkn3cvaho" path="res://Assets/Tiles/Tile03.png" id="5_036b0"]
 [ext_resource type="PackedScene" uid="uid://cakdbtxho1uw6" path="res://FirstEnemy.tscn" id="5_ioo17"]
@@ -64,28 +63,48 @@ color = Color(0.0961667, 1.03601e-05, 0.101362, 1)
 polygon = PackedVector2Array(-4646, -2381, 9657, -2368, 9631, 2024, -5511, 2129)
 
 [node name="PointLight2D" type="PointLight2D" parent="Background"]
-position = Vector2(-411, -198)
+position = Vector2(-103, -208)
 scale = Vector2(12.8594, 12.0234)
 energy = 2.0
 range_z_max = -4
 texture = SubResource("GradientTexture2D_aqk2v")
+texture_scale = 2.0
 
 [node name="PointLight2D2" type="PointLight2D" parent="Background"]
-position = Vector2(756, 8.99997)
+position = Vector2(1368, -122)
 scale = Vector2(12.8594, 12.0234)
 energy = 2.0
 range_z_max = -4
 texture = SubResource("GradientTexture2D_aqk2v")
+texture_scale = 2.0
 
 [node name="PointLight2D3" type="PointLight2D" parent="Background"]
-position = Vector2(1324, -305)
+position = Vector2(2966, -603)
 scale = Vector2(12.8594, 12.0234)
 energy = 2.0
 range_z_max = -4
 texture = SubResource("GradientTexture2D_aqk2v")
+texture_scale = 2.0
+
+[node name="PointLight2D4" type="PointLight2D" parent="Background"]
+position = Vector2(4258, -146)
+scale = Vector2(12.8594, 12.0234)
+energy = 2.0
+range_z_max = -4
+texture = SubResource("GradientTexture2D_aqk2v")
+texture_scale = 2.0
+
+[node name="PointLight2D5" type="PointLight2D" parent="Background"]
+position = Vector2(6074, -583)
+scale = Vector2(12.8594, 12.0234)
+energy = 2.0
+range_z_max = -4
+texture = SubResource("GradientTexture2D_aqk2v")
+texture_scale = 2.0
 
 [node name="Siilouets" type="Node2D" parent="Background"]
 position = Vector2(-288, 0)
+scale = Vector2(1, 2)
 
 [node name="Parallax2D" type="Parallax2D" parent="Background/Siilouets"]
 scroll_scale = Vector2(0.6, 1)
@@ -93,38 +112,142 @@ scroll_scale = Vector2(0.6, 1)
 [node name="Sprite2D" type="Sprite2D" parent="Background/Siilouets/Parallax2D"]
 position = Vector2(-536, -133)
 rotation = 0.9168
-scale = Vector2(0.615789, 0.779272)
+scale = Vector2(0.615789, 1.3)
 texture = ExtResource("6_dwbse")
 
 [node name="Sprite2D2" type="Sprite2D" parent="Background/Siilouets/Parallax2D"]
 position = Vector2(-26, -147)
 rotation = -0.0792652
-scale = Vector2(0.615789, 0.779272)
+scale = Vector2(0.615789, 1.3)
 texture = ExtResource("6_dwbse")
 
 [node name="Sprite2D3" type="Sprite2D" parent="Background/Siilouets/Parallax2D"]
 position = Vector2(197, -168)
 rotation = 0.300414
-scale = Vector2(0.615789, 0.779272)
+scale = Vector2(0.615789, 1.3)
 texture = ExtResource("6_dwbse")
 
 [node name="Sprite2D4" type="Sprite2D" parent="Background/Siilouets/Parallax2D"]
 position = Vector2(748, -143)
 rotation = 0.802766
-scale = Vector2(0.615789, 0.779272)
+scale = Vector2(0.615789, 1.3)
+texture = ExtResource("6_dwbse")
+
+[node name="Sprite2D7" type="Sprite2D" parent="Background/Siilouets/Parallax2D"]
+position = Vector2(1565.89, -177.352)
+rotation = -0.0792652
+scale = Vector2(0.615789, 1.3)
+texture = ExtResource("6_dwbse")
+
+[node name="Sprite2D8" type="Sprite2D" parent="Background/Siilouets/Parallax2D"]
+position = Vector2(1788.89, -198.352)
+rotation = 0.300414
+scale = Vector2(0.615789, 1.3)
+texture = ExtResource("6_dwbse")
+
+[node name="Sprite2D9" type="Sprite2D" parent="Background/Siilouets/Parallax2D"]
+position = Vector2(2339.89, -173.352)
+rotation = 0.802766
+scale = Vector2(0.615789, 1.3)
+texture = ExtResource("6_dwbse")
+
+[node name="Sprite2D14" type="Sprite2D" parent="Background/Siilouets/Parallax2D"]
+position = Vector2(3123, -240)
+rotation = -0.0792652
+scale = Vector2(0.615789, 1.3)
+texture = ExtResource("6_dwbse")
+
+[node name="Sprite2D15" type="Sprite2D" parent="Background/Siilouets/Parallax2D"]
+position = Vector2(3466.89, -233.5)
+rotation = 0.300414
+scale = Vector2(0.615789, 1.3)
+texture = ExtResource("6_dwbse")
+
+[node name="Sprite2D16" type="Sprite2D" parent="Background/Siilouets/Parallax2D"]
+position = Vector2(4017.89, -208.5)
+rotation = 0.802766
+scale = Vector2(0.615789, 1.3)
+texture = ExtResource("6_dwbse")
+
+[node name="Sprite2D17" type="Sprite2D" parent="Background/Siilouets/Parallax2D"]
+position = Vector2(4940, -201)
+rotation = 0.144989
+scale = Vector2(0.616, 1.3)
+texture = ExtResource("6_dwbse")
+
+[node name="Sprite2D18" type="Sprite2D" parent="Background/Siilouets/Parallax2D"]
+position = Vector2(5101, -228.5)
+rotation = 0.300414
+scale = Vector2(0.616, 1.3)
+texture = ExtResource("6_dwbse")
+
+[node name="Sprite2D19" type="Sprite2D" parent="Background/Siilouets/Parallax2D"]
+position = Vector2(5576, -203.5)
+rotation = 0.802766
+scale = Vector2(0.615789, 1.3)
 texture = ExtResource("6_dwbse")
 
 [node name="Sprite2D5" type="Sprite2D" parent="Background/Siilouets/Parallax2D"]
 position = Vector2(812, -159)
 rotation = 2.71983
-scale = Vector2(0.615789, 0.779272)
+scale = Vector2(0.615789, 1.3)
+texture = ExtResource("6_dwbse")
+flip_v = true
+
+[node name="Sprite2D10" type="Sprite2D" parent="Background/Siilouets/Parallax2D"]
+position = Vector2(2819.33, -210.56)
+rotation = 0.364869
+scale = Vector2(0.615789, 1.3)
+texture = ExtResource("6_dwbse")
+
+[node name="Sprite2D11" type="Sprite2D" parent="Background/Siilouets/Parallax2D"]
+position = Vector2(4373, -228)
+rotation = 0.364869
+scale = Vector2(0.615789, 1.3)
+texture = ExtResource("6_dwbse")
+
+[node name="Sprite2D12" type="Sprite2D" parent="Background/Siilouets/Parallax2D"]
+position = Vector2(4697, -207.5)
+rotation = 0.744548
+scale = Vector2(0.615789, 1.3)
+texture = ExtResource("6_dwbse")
+
+[node name="Sprite2D20" type="Sprite2D" parent="Background/Siilouets/Parallax2D"]
+position = Vector2(1313.27, -120)
+rotation = 0.9168
+scale = Vector2(0.615789, 1.3)
+texture = ExtResource("6_dwbse")
+
+[node name="Sprite2D21" type="Sprite2D" parent="Background/Siilouets/Parallax2D"]
+position = Vector2(4189.17, -160.352)
+rotation = 0.31406
+scale = Vector2(0.615789, 1.3)
+texture = ExtResource("6_dwbse")
+
+[node name="Sprite2D22" type="Sprite2D" parent="Background/Siilouets/Parallax2D"]
+position = Vector2(2661.27, -146)
+rotation = 2.71983
+scale = Vector2(0.615789, 1.3)
+texture = ExtResource("6_dwbse")
+flip_v = true
+
+[node name="Sprite2D23" type="Sprite2D" parent="Background/Siilouets/Parallax2D"]
+position = Vector2(6428, -178)
+rotation = 0.744548
+scale = Vector2(0.615789, 1.3)
+texture = ExtResource("6_dwbse")
+
+[node name="Sprite2D13" type="Sprite2D" parent="Background/Siilouets/Parallax2D"]
+position = Vector2(3557, -203.5)
+rotation = 3.00433
+scale = Vector2(0.615789, 1.3)
 texture = ExtResource("6_dwbse")
 flip_v = true
 
 [node name="Sprite2D6" type="Sprite2D" parent="Background/Siilouets/Parallax2D"]
 position = Vector2(1179, -175)
 rotation = 2.32075
-scale = Vector2(0.615789, 0.779272)
+scale = Vector2(0.615789, 1.3)
 texture = ExtResource("6_dwbse")
 flip_h = true
 
@@ -138,6 +261,7 @@ scale = Vector2(0.5, 0.5)
 
 [node name="RoofTiles" type="Node2D" parent="."]
 z_index = -1
+position = Vector2(0, -150)
 
 [node name="Tile01" type="Parallax2D" parent="RoofTiles"]
 scroll_offset = Vector2(0, 269)
@@ -145,48 +269,43 @@ scroll_offset = Vector2(0, 269)
 [node name="TileMap" type="TileMap" parent="RoofTiles/Tile01"]
 tile_set = SubResource("TileSet_036b0")
 format = 2
-layer_0/tile_data = PackedInt32Array(-2359332, 65538, 0, -2293768, 2, 0, -2555888, 65538, 0, -2621394, 2, 0, -2686901, 65538, 0)
+layer_0/tile_data = PackedInt32Array(-2359332, 65538, 0, -2293768, 2, 0, -2555888, 65538, 0, -2621394, 2, 0, -2686901, 65538, 0, -2817946, 65538, 0, -2883482, 65538, 0, -3080068, 2, 0, -3473275, 65538, 0, -3669861, 2, 0, -3931983, 65538, 0, -3866413, 2, 0, -3997494, 65538, 0, -3800847, 65538, 0, -3800815, 65538, 0, -3735250, 2, 0, -3538592, 2, 0, -3604155, 65538, 0, -3473028, 2, 0, -3407473, 2, 0)
 
 [node name="BlackTiles" type="Node2D" parent="."]
 z_index = -1
 
 [node name="Tile01" type="StaticBody2D" parent="BlackTiles"]
 position = Vector2(0, -4)
+collision_layer = 33
 
 [node name="Polygon2D" type="Polygon2D" parent="BlackTiles/Tile01"]
 color = Color(0, 0, 0, 1)
-polygon = PackedVector2Array(-729, 1, -594, 11, -334, 6, -62, 1, 109, 16, 381, 14, 654, 14, 879, 32, 1305, 6, 1312, 809, -787, 809)
+polygon = PackedVector2Array(-729, 1, -594, 11, -334, 6, -62, 1, 109, 16, 381, 14, 654, 14, 879, 32, 1305, 6, 1622, -42, 1913, -77, 2592, -91, 4171, -38, 5071, 61, 6705, 64, 6722, 807, 1312, 809, -787, 809)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="BlackTiles/Tile01"]
 position = Vector2(1, 5)
-polygon = PackedVector2Array(1305, 7, 1055, 28, 906, 44, 597, 19, 381, 24, 138, 34, -69, 19, -242, 16, -474, 31, -730, 6, -787, 809, 1314, 808)
+polygon = PackedVector2Array(1305, 7, 1055, 28, 906, 44, 597, 19, 381, 24, 138, 34, -69, 19, -242, 16, -474, 31, -730, 6, -787, 809, 1314, 808, 6713, 793, 6700, 74, 4822, 28, 4199, -40, 3492, -52, 2664, -92, 1931, -78)
 
 [node name="Tile02" type="StaticBody2D" parent="BlackTiles"]
+position = Vector2(0, -150)
 
 [node name="Polygon2D" type="Polygon2D" parent="BlackTiles/Tile02"]
 color = Color(0, 0, 0, 1)
-polygon = PackedVector2Array(1475, -399, 905, -388, 595, -388, 380, -353, 36, -339, -101, -319, -375, -324, -837, -335, -850, -940, 1487, -914)
+polygon = PackedVector2Array(1589, -399, 905, -388, 595, -388, 380, -353, 36, -339, -101, -319, -375, -324, -837, -335, -927, -2186, 1677, -2240, 3541, -2227, 6622, -2240, 6644, -564, 4831, -614, 3500, -670, 2955, -696, 2069, -539)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="BlackTiles/Tile02"]
-polygon = PackedVector2Array(1487, -912, 1469, -395, 1078, -394, 840, -387, 470, -367, 170, -353, -11, -327, -286, -318, -582, -334, -840, -331, -850, -947)
+polygon = PackedVector2Array(1487, -912, 3539, -1069, 6571, -991, 6646, -567, 4970, -614, 3625, -669, 2980, -707, 2297, -590, 1810, -472, 1469, -395, 1078, -394, 840, -387, 470, -367, 170, -353, -11, -327, -286, -318, -582, -334, -840, -331, -850, -947)
 
 [node name="GroundTiles" type="Node2D" parent="."]
 modulate = Color(0.521141, 0.521141, 0.521141, 1)
 z_index = 1
-
-[node name="Ground" type="Node2D" parent="GroundTiles"]
-
-[node name="Sprite2D" type="Sprite2D" parent="GroundTiles/Ground"]
-position = Vector2(285.5, -12)
-scale = Vector2(8.18, 1)
-texture = ExtResource("3_k3n1d")
 
 [node name="Parallax2D" type="Parallax2D" parent="GroundTiles"]
 
 [node name="TileMap" type="TileMap" parent="GroundTiles/Parallax2D"]
 tile_set = SubResource("TileSet_gv5m4")
 format = 2
-layer_0/tile_data = PackedInt32Array(-65541, 65536, 0, -131068, 131072, 0, -131058, 0, 0, -131047, 65536, 0, -65552, 131072, 0, -131036, 0, 0, -131028, 65536, 0, -65483, 65536, 0, -65473, 131072, 0, -65565, 0, 0, -65578, 65536, 0, -65462, 131072, 0)
+layer_0/tile_data = PackedInt32Array(-65541, 65536, 0, -131068, 131072, 0, -131058, 0, 0, -131047, 65536, 0, -65552, 131072, 0, -131036, 0, 0, -131028, 65536, 0, -65483, 65536, 0, -65473, 131072, 0, -65565, 0, 0, -65578, 65536, 0, -65462, 131072, 0, -196521, 0, 0, -262047, 65536, 0, -393106, 65536, 0, -458632, 131072, 0, -524154, 0, 0, -458606, 65536, 0, -524130, 65536, 0, -524118, 131072, 0, -524105, 0, 0, -524094, 0, 0, -393013, 65536, 0, -524080, 0, 0, -458533, 0, 0, -458524, 65536, 0, -392977, 131072, 0, -392965, 131072, 0, -327421, 65536, 0, -327410, 0, 0, -261863, 0, 0, -65245, 131072, 0, 300, 65536, 0, 312, 0, 0, 65861, 65536, 0, 65871, 65536, 0, 345, 0, 0, 65891, 65536, 0, 65902, 131072, 0, 65911, 131072, 0, 65921, 65536, 0, 65932, 0, 0, 131478, 65536, 0, 131485, 65536, 0)
 
 [node name="Enemies" type="Node2D" parent="."]
 
@@ -219,10 +338,48 @@ position = Vector2(-321, 38)
 scale = Vector2(4.372, 4.06)
 texture = ExtResource("4_aqk2v")
 
+[node name="ForeGroundTile8" type="Sprite2D" parent="ForeGround/ForeGroundTiles/Parallax2D"]
+modulate = Color(0.230315, 0.230315, 0.230315, 1)
+z_index = 2
+position = Vector2(4316, -118)
+scale = Vector2(4.372, 4.06)
+texture = ExtResource("4_aqk2v")
+
+[node name="ForeGroundTile11" type="Sprite2D" parent="ForeGround/ForeGroundTiles/Parallax2D"]
+modulate = Color(0.230315, 0.230315, 0.230315, 1)
+z_index = 2
+position = Vector2(5915, 0)
+scale = Vector2(4.372, 4.06)
+texture = ExtResource("4_aqk2v")
+
 [node name="ForeGroundTile3" type="Sprite2D" parent="ForeGround/ForeGroundTiles/Parallax2D"]
 modulate = Color(0.230315, 0.230315, 0.230315, 1)
 z_index = 2
 position = Vector2(981, 48)
+scale = Vector2(4.372, 4.06)
+texture = ExtResource("5_036b0")
+flip_h = true
+
+[node name="ForeGroundTile7" type="Sprite2D" parent="ForeGround/ForeGroundTiles/Parallax2D"]
+modulate = Color(0.230315, 0.230315, 0.230315, 1)
+z_index = 2
+position = Vector2(3700, -43)
+scale = Vector2(4.372, 4.06)
+texture = ExtResource("5_036b0")
+flip_h = true
+
+[node name="ForeGroundTile10" type="Sprite2D" parent="ForeGround/ForeGroundTiles/Parallax2D"]
+modulate = Color(0.230315, 0.230315, 0.230315, 1)
+z_index = 2
+position = Vector2(5196, 63)
+scale = Vector2(4.372, 4.06)
+texture = ExtResource("5_036b0")
+flip_h = true
+
+[node name="ForeGroundTile9" type="Sprite2D" parent="ForeGround/ForeGroundTiles/Parallax2D"]
+modulate = Color(0.230315, 0.230315, 0.230315, 1)
+z_index = 2
+position = Vector2(3700, -43)
 scale = Vector2(4.372, 4.06)
 texture = ExtResource("5_036b0")
 flip_h = true
@@ -239,6 +396,27 @@ flip_h = true
 modulate = Color(0.230315, 0.230315, 0.230315, 1)
 z_index = 2
 position = Vector2(379, 74)
+scale = Vector2(4.372, 4.06)
+texture = ExtResource("5_036b0")
+
+[node name="ForeGroundTile6" type="Sprite2D" parent="ForeGround/ForeGroundTiles/Parallax2D"]
+modulate = Color(0.230315, 0.230315, 0.230315, 1)
+z_index = 2
+position = Vector2(2820, -81)
+scale = Vector2(4.372, 4.06)
+texture = ExtResource("5_036b0")
+
+[node name="ForeGroundTile12" type="Sprite2D" parent="ForeGround/ForeGroundTiles/Parallax2D"]
+modulate = Color(0.230315, 0.230315, 0.230315, 1)
+z_index = 2
+position = Vector2(6470, 97)
+scale = Vector2(4.372, 4.06)
+texture = ExtResource("5_036b0")
+
+[node name="ForeGroundTile5" type="Sprite2D" parent="ForeGround/ForeGroundTiles/Parallax2D"]
+modulate = Color(0.230315, 0.230315, 0.230315, 1)
+z_index = 2
+position = Vector2(2080, -55)
 scale = Vector2(4.372, 4.06)
 texture = ExtResource("5_036b0")
 
@@ -263,6 +441,15 @@ scale = Vector2(1.26341, 2.55131)
 texture = ExtResource("6_dwbse")
 flip_h = true
 
+[node name="Sprite2D14" type="Sprite2D" parent="ForeGround/Sillouets/Parallax2D"]
+modulate = Color(0.241156, 0.241156, 0.241156, 1)
+z_index = 3
+position = Vector2(6216, -267)
+rotation = -0.770962
+scale = Vector2(1.26341, 2.55131)
+texture = ExtResource("6_dwbse")
+flip_h = true
+
 [node name="Sprite2D3" type="Sprite2D" parent="ForeGround/Sillouets/Parallax2D"]
 modulate = Color(0.241156, 0.241156, 0.241156, 1)
 z_index = 3
@@ -278,6 +465,78 @@ z_index = 3
 position = Vector2(379, 13)
 rotation = -0.0604626
 scale = Vector2(1.26341, 2.55131)
+texture = ExtResource("6_dwbse")
+flip_h = true
+
+[node name="Sprite2D6" type="Sprite2D" parent="ForeGround/Sillouets/Parallax2D"]
+modulate = Color(0.241156, 0.241156, 0.241156, 1)
+z_index = 3
+position = Vector2(2940, -363)
+rotation = -0.313023
+scale = Vector2(1.26341, 3)
+texture = ExtResource("6_dwbse")
+flip_h = true
+
+[node name="Sprite2D7" type="Sprite2D" parent="ForeGround/Sillouets/Parallax2D"]
+modulate = Color(0.241156, 0.241156, 0.241156, 1)
+z_index = 3
+position = Vector2(1669, -197)
+rotation = -0.587576
+scale = Vector2(1.26341, 3)
+texture = ExtResource("6_dwbse")
+flip_h = true
+
+[node name="Sprite2D9" type="Sprite2D" parent="ForeGround/Sillouets/Parallax2D"]
+modulate = Color(0.241156, 0.241156, 0.241156, 1)
+z_index = 3
+position = Vector2(4769.82, -322.938)
+rotation = 0.147108
+scale = Vector2(1.26341, 2.55131)
+texture = ExtResource("6_dwbse")
+flip_h = true
+
+[node name="Sprite2D10" type="Sprite2D" parent="ForeGround/Sillouets/Parallax2D"]
+modulate = Color(0.241156, 0.241156, 0.241156, 1)
+z_index = 3
+position = Vector2(3539.82, -345.937)
+rotation = -0.295322
+scale = Vector2(1.26341, 2.55131)
+texture = ExtResource("6_dwbse")
+flip_h = true
+
+[node name="Sprite2D11" type="Sprite2D" parent="ForeGround/Sillouets/Parallax2D"]
+modulate = Color(0.241156, 0.241156, 0.241156, 1)
+z_index = 3
+position = Vector2(4240, -297)
+rotation = -0.783482
+scale = Vector2(1.263, 3)
+texture = ExtResource("6_dwbse")
+flip_h = true
+
+[node name="Sprite2D13" type="Sprite2D" parent="ForeGround/Sillouets/Parallax2D"]
+modulate = Color(0.241156, 0.241156, 0.241156, 1)
+z_index = 3
+position = Vector2(2990, -347)
+rotation = 0.354818
+scale = Vector2(1.263, 3)
+texture = ExtResource("6_dwbse")
+flip_h = true
+
+[node name="Sprite2D12" type="Sprite2D" parent="ForeGround/Sillouets/Parallax2D"]
+modulate = Color(0.241156, 0.241156, 0.241156, 1)
+z_index = 3
+position = Vector2(5543.82, -445.938)
+rotation = -0.127445
+scale = Vector2(1.26341, 3)
+texture = ExtResource("6_dwbse")
+flip_h = true
+
+[node name="Sprite2D8" type="Sprite2D" parent="ForeGround/Sillouets/Parallax2D"]
+modulate = Color(0.241156, 0.241156, 0.241156, 1)
+z_index = 3
+position = Vector2(2424, -370)
+rotation = -0.0604626
+scale = Vector2(1.26341, 3)
 texture = ExtResource("6_dwbse")
 flip_h = true
 
@@ -299,6 +558,7 @@ MiniGameScene = ExtResource("15_hiqwa")
 [node name="Camera2D" type="Camera2D" parent="GameController"]
 position = Vector2(4, -145)
 scale = Vector2(0.4, 0.4)
+zoom = Vector2(0.4, 0.4)
 
 [node name="EnemyController" type="Node2D" parent="GameController"]
 script = ExtResource("10_wse8f")
